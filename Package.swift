@@ -1,5 +1,9 @@
 import PackageDescription
-
+#if os(OSX)
+    let COpenSSLURL = "https://github.com/Zewo/COpenSSL-OSX.git"
+#else
+    let COpenSSLURL = "https://github.com/Zewo/COpenSSL.git"
+#endif
 let package = Package(
     name: "SwiftSlackBotter",
     dependencies: [
@@ -8,6 +12,7 @@ let package = Package(
       .Package(url: "https://github.com/Zewo/CURIParser.git", majorVersion: 0, minor: 2),
       .Package(url: "https://github.com/Zewo/CHTTPParser.git", majorVersion: 0, minor: 2),
       .Package(url: "https://github.com/Zewo/CLibvenice.git", majorVersion: 0, minor: 2),
+      .Package(url: COpenSSLURL, majorVersion: 0, minor: 2),
       .Package(url: "https://github.com/czechboy0/Environment.git", majorVersion: 0),
     ]
 )
