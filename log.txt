@@ -2,3 +2,6 @@ Compiling Swift Module 'HTTP' (23 sources)
 Linking Library:  .build/debug/HTTP.a
 Linking Library:  .build/debug/HTTPClient.a
 Linking Library:  .build/debug/HTTPSClient.a
+Linking Library:  .build/debug/WebSocket.a
+Compiling Swift Module 'SwiftSlackBotter' (6 sources)
+Linking Library:  .build/debug/SwiftSlackBotter.a

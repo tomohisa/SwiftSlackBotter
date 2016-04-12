@@ -93,6 +93,8 @@ public class Bot {
     switch event {
       case is HelloEvent:
         print("Hello Event Came")
+      case is MessageEvent:
+        print("Message Event Came")
       default:
         print("Nothing Match")
     }
