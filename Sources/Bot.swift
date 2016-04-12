@@ -119,7 +119,8 @@ public class Bot {
     do {
       print("posting : \(post)")
       try socket.send(post)
-    } catch {
+    } catch let error {
+      print("Error: \(error)")
       return
     }
     self.uniqueReplyId += 1
