@@ -89,9 +89,7 @@ public class Bot {
   func parseSlackEvent(message: String) throws {
     let eventJson = try JSONParser().parse(message.data)
 
-    guard let event = try self.eventMatcher.matchWithJSONData(eventJson) else {
-      throw Error.EventUnmatchError
-    }
+    let event = try self.eventMatcher.matchWithJSONData(eventJson)
     switch event {
       case is HelloEvent:
         print("Hello Event Came")
