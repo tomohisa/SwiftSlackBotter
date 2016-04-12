@@ -18,6 +18,7 @@ public class DefaultEventMatcher : EventMatcher {
     if MessageEvent.isJSOMMatch(jsondata) {
       return try MessageEvent(rawdata: nil,jsondata: jsondata)
     }
+    print(jsondata)
     return nil
   }
 }
