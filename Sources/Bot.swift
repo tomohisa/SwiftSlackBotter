@@ -18,6 +18,8 @@ public class Bot {
   let client : HTTPSClient.Client
   var webSocketClient : WebSocket.Client?
   let eventMatcher : EventMatcher
+  var uniqueReplyId : Int = 1
+  var socketToSend: Socket? = nil
 
   private let eventEmitter : EventEmitter<(RTMEvent,Bot)> = EventEmitter<(RTMEvent,Bot)>()
   public func onEvent(listen: EventListener<(RTMEvent,Bot)>.Listen) -> EventListener<(RTMEvent,Bot)> {
@@ -91,6 +93,7 @@ public class Bot {
     socket.onClose { (code: CloseCode?, reason: String?) in
         print("close with code: \(code ?? .NoStatus), reason: \(reason ?? "no reason")")
     }
+    self.socketToSend = socket
   }
   func parseSlackEvent(message: String) throws {
     let eventJson = try JSONParser().parse(message.data)
@@ -99,6 +102,26 @@ public class Bot {
       return;
     }
     try self.eventEmitter.emit((event,self));
+  }
+
+  public func reply(message:String,event:MessageEvent) {
+    guard let channel:String = event.channel else {
+      return
+    }
+    let reply : JSON = ["id":"\(self.uniqueReplyId.description)",
+                "type":"message",
+                "channel":"\(channel)",
+                "text": "\(message)"]
+    let post: String = JSONSerializer().serializeToString(reply)
+    guard let socket = self.socketToSend else {
+      return
+    }
+    do {
+      try socket.send(post)
+    } catch {
+      return
+    }
+    self.uniqueReplyId += 1
   }
 
   private func postMessage(channel: String, text: String) {
