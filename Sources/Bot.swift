@@ -108,8 +108,7 @@ public class Bot {
     guard let channel:String = event.channel else {
       return
     }
-    let reply : JSON = ["type":"message",
-                "channel":"\(channel)",
+    let reply : JSON = ["channel":"\(channel)",
                 "text": "\(message)"]
     print("reply : \(reply)")
     let post: String = JSONSerializer().serializeToString(reply)
