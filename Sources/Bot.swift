@@ -19,17 +19,15 @@ public class Bot {
   var webSocketClient : WebSocket.Client?
   let eventMatcher : EventMatcher
 
-  let eventObserver : EventObserver?
-  private let eventEmitter : EventEmitter<RTMEvent> = EventEmitter<RTMEvent>()
-
-  public func onEvent(listen: EventListener<RTMEvent>.Listen) -> EventListener<RTMEvent> {
+  private let eventEmitter : EventEmitter<(RTMEvent,Bot)> = EventEmitter<(RTMEvent,Bot)>()
+  public func onEvent(listen: EventListener<(RTMEvent,Bot)>.Listen) -> EventListener<(RTMEvent,Bot)> {
       return eventEmitter.addListener(listen: listen)
   }
 
   private let headers: Headers = ["Content-Type": "application/x-www-form-urlencoded"]
 
 
-  public init (token: String? = nil, event_matcher : EventMatcher = DefaultEventMatcher(), event_observer:EventObserver? = nil) throws {
+  public init (token: String? = nil, event_matcher : EventMatcher = DefaultEventMatcher()) throws {
     if token == nil {
       guard let t = Environment().getVar("SLACK_BOT_TOKEN") else {
         throw Error.TokenError
@@ -41,7 +39,6 @@ public class Bot {
     self.webSocketUri = nil
     self.webSocketClient = nil
     self.eventMatcher = event_matcher
-    self.eventObserver = event_observer
     do {
       self.client = try Client(host:"slack.com", port:443)
     } catch {
@@ -98,26 +95,10 @@ public class Bot {
   func parseSlackEvent(message: String) throws {
     let eventJson = try JSONParser().parse(message.data)
 
-    let event = try self.eventMatcher.matchWithJSONData(eventJson)
-    switch event {
-      case is HelloEvent:
-        print("Hello Event Came")
-      case is MessageEvent:
-        print("Message Event Came")
-      default:
-        print("Nothing Match")
+    guard let event = try self.eventMatcher.matchWithJSONData(eventJson) else {
+      return;
     }
-/*
-
-    print(eventDict)
-    guard let type = eventDict["type"]?.string,
-          let text = eventDict["text"]?.string,
-          let channel = eventDict["channel"]?.string
-    else { return }
-    if type == "message" && text == "sfb" {
-        self.postToSlack(channel)
-    }
-    */
+    try self.eventEmitter.emit((event,self));
   }
 
   private func postMessage(channel: String, text: String) {
