@@ -2,6 +2,7 @@ import WebSocket
 import Environment
 import HTTPSClient
 import JSON
+import Event
 
 public class Bot {
   public enum Error: ErrorType {
@@ -18,10 +19,17 @@ public class Bot {
   var webSocketClient : WebSocket.Client?
   let eventMatcher : EventMatcher
 
+  let eventObserver : EventObserver?
+  private let eventEmitter : EventEmitter<RTMEvent> = EventEmitter<RTMEvent>()
+
+  public func onEvent(listen: EventListener<RTMEvent>.Listen) -> EventListener<RTMEvent> {
+      return eventEmitter.addListener(listen: listen)
+  }
+
   private let headers: Headers = ["Content-Type": "application/x-www-form-urlencoded"]
 
 
-  public init (token: String? = nil, event_matcher : EventMatcher = DefaultEventMatcher()) throws {
+  public init (token: String? = nil, event_matcher : EventMatcher = DefaultEventMatcher(), event_observer:EventObserver? = nil) throws {
     if token == nil {
       guard let t = Environment().getVar("SLACK_BOT_TOKEN") else {
         throw Error.TokenError
@@ -33,6 +41,7 @@ public class Bot {
     self.webSocketUri = nil
     self.webSocketClient = nil
     self.eventMatcher = event_matcher
+    self.eventObserver = event_observer
     do {
       self.client = try Client(host:"slack.com", port:443)
     } catch {
