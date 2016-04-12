@@ -108,8 +108,7 @@ public class Bot {
     guard let channel:String = event.channel else {
       return
     }
-    let reply : JSON = ["id":"\(self.uniqueReplyId.description)",
-                "type":"message",
+    let reply : JSON = ["type":"message",
                 "channel":"\(channel)",
                 "text": "\(message)"]
     print("reply : \(reply)")
