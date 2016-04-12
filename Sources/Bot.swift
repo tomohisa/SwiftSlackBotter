@@ -112,11 +112,13 @@ public class Bot {
                 "type":"message",
                 "channel":"\(channel)",
                 "text": "\(message)"]
+    print("reply : \(reply)")
     let post: String = JSONSerializer().serializeToString(reply)
     guard let socket = self.socketToSend else {
       return
     }
     do {
+      print("posting : \(post)")
       try socket.send(post)
     } catch {
       return
