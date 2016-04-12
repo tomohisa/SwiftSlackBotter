@@ -10,14 +10,18 @@ public class Bot {
     case SocketConnectionError
     case TokenError
     case InitializeError
+    case EventUnmatchError
   }
   let botToken : String
   var webSocketUri : URI?
   let client : HTTPSClient.Client
+  var webSocketClient : WebSocket.Client?
+  let eventMatcher : EventMatcher
+
   private let headers: Headers = ["Content-Type": "application/x-www-form-urlencoded"]
 
 
-  public init (token: String? = nil) throws {
+  public init (token: String? = nil, event_matcher : EventMatcher = DefaultEventMatcher()) throws {
     if token == nil {
       guard let t = Environment().getVar("SLACK_BOT_TOKEN") else {
         throw Error.TokenError
@@ -27,6 +31,8 @@ public class Bot {
       self.botToken = token!
     }
     self.webSocketUri = nil
+    self.webSocketClient = nil
+    self.eventMatcher = event_matcher
     do {
       self.client = try Client(host:"slack.com", port:443)
     } catch {
@@ -61,11 +67,11 @@ public class Bot {
       throw Error.RTMConnectionError
     }
     do {
-      let sc = try WebSocket.Client(ssl: true, host: uri.host!, port: 443) {
+      self.webSocketClient = try WebSocket.Client(ssl: true, host: uri.host!, port: 443) {
                   (socket: Socket) throws -> Void in
                   self.setupSocket(socket)
               }
-      try sc.connect(uri.description)
+      try self.webSocketClient!.connect(uri.description)
     } catch {
       throw Error.SocketConnectionError
     }
@@ -81,7 +87,19 @@ public class Bot {
     }
   }
   func parseSlackEvent(message: String) throws {
-    let eventDict = try JSONParser().parse(message.data).asDictionary()
+    let eventJson = try JSONParser().parse(message.data)
+
+    guard let event = try self.eventMatcher.matchWithJSONData(eventJson) else {
+      throw Error.EventUnmatchError
+    }
+    switch event {
+      case is HelloEvent:
+        print("Hello Event Came")
+      default:
+        print("Nothing Match")
+    }
+/*
+
     print(eventDict)
     guard let type = eventDict["type"]?.string,
           let text = eventDict["text"]?.string,
@@ -90,6 +108,7 @@ public class Bot {
     if type == "message" && text == "sfb" {
         self.postToSlack(channel)
     }
+    */
   }
 
   private func postMessage(channel: String, text: String) {

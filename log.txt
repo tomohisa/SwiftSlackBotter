@@ -9,9 +9,9 @@ Using version 0.2.2 of package Data
 Cloning https://github.com/Zewo/System.git
 Using version 0.2.0 of package System
 Cloning https://github.com/Zewo/MediaType.git
-Using version 0.3.0 of package MediaType
+Using version 0.3.1 of package MediaType
 Cloning https://github.com/Zewo/InterchangeData.git
-Using version 0.2.1 of package InterchangeData
+Using version 0.3.0 of package InterchangeData
 Cloning https://github.com/Zewo/URI.git
 Using version 0.2.0 of package URI
 Cloning https://github.com/Zewo/CURIParser.git
@@ -45,7 +45,7 @@ Using version 0.2.0 of package Event
 Cloning https://github.com/Zewo/Base64.git
 Using version 0.2.1 of package Base64
 Cloning https://github.com/Zewo/JSON.git
-Using version 0.3.0 of package JSON
+Using version 0.3.1 of package JSON
 Cloning https://github.com/czechboy0/Environment.git
 Using version 0.1.0 of package Environment
 Compiling Swift Module 'System' (1 sources)
@@ -112,5 +112,5 @@ Compiling Swift Module 'EnvironmentTests' (1 sources)
                 ^~~~~~~~~~~~
                 #function
 Linking Executable:  .build/debug/EnvironmentTests
-Compiling Swift Module 'SwiftSlackBotter' (1 sources)
+Compiling Swift Module 'SwiftSlackBotter' (5 sources)
 Linking Library:  .build/debug/SwiftSlackBotter.a
