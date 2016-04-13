@@ -16,7 +16,7 @@ public class DefaultEventObserver : EventObserver {
       case let hello as HelloEvent:
         try onHello?(hello, bot)
       case let message as MessageEvent:
-        if message.user == bot.botId || message.isBotMessage {
+        if message.user == bot.botInfo?.botId || message.isBotMessage {
           try onOwnMessage?(message, bot)
         } else {
           try onMessage?(message, bot)
