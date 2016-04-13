@@ -21,14 +21,15 @@ public class Bot {
   let eventMatcher : EventMatcher
   var uniqueReplyId : Int = 1
   var socketToSend: Socket? = nil
+
   var teamInfo : JSON? = nil
   public var botId : String? {
     get {
       return self.teamInfo?["self"]?["id"]?.string
     }
   }
-  var observers = [EventObserver]()
 
+  var observers = [EventObserver]()
   public func addObserver(observer:EventObserver) {
     observers.append(observer)
   }
@@ -117,18 +118,13 @@ public class Bot {
     guard let channel:String = event.channel else {
       return
     }
-    do {
-          try client.post("/api/chat.postMessage", headers: headers, body: "token=\(self.botToken)&channel=\(channel)&text=\(message)&as_user=true")
-    } catch { throw Error.PostFailedError
-    }
+    try self.postMessage(channel,text:message,asUser:true)
   }
 
-  private func postMessage(channel: String, text: String) {
+  public func postMessage(channel: String, text:String, asUser:Bool = true, botName:String?=nil) throws {
     do {
-          try client.post("/api/chat.postMessage", headers: headers, body: "token=\(self.botToken)&channel=\(channel)&text=\(text)")
-    } catch {}
-  }
-  private func postToSlack(channel: String) {
-    postMessage(channel, text: "Hi! from server")
+      let body = "token=\(self.botToken)&channel=\(channel)&text=\(text)&asUser=\(asUser)" + (botName == nil ? "" : "&username=\(botName)")
+          try client.post("/api/chat.postMessage", headers: headers, body: body)
+    } catch { throw Error.PostFailedError }
   }
 }

@@ -8,8 +8,8 @@ public class DefaultEventObserver : EventObserver {
   public var onMessage : ((MessageEvent, Bot) throws -> Void)? = nil
   public var onOwnMessage : ((MessageEvent, Bot) throws -> Void)? = nil
   public var onHello : ((HelloEvent, Bot) throws -> Void)? = nil
-  public init(onmessage:((MessageEvent, Bot) throws -> Void)? = nil) {
-    onMessage = onmessage
+  public init(onMessage:((MessageEvent, Bot) throws -> Void)? = nil) {
+    self.onMessage = onMessage
   }
   public func onEvent(event:RTMEvent, bot:Bot) throws {
     switch event {
