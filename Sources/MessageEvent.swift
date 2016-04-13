@@ -1,5 +1,6 @@
 import Data
 import JSON
+import Log
 
 public struct MessageEvent : RTMEvent {
   public var type : String
@@ -9,6 +10,20 @@ public struct MessageEvent : RTMEvent {
   public let user : String?
   public let text : String?
   public let ts : String?
+  public var subtype : String? {
+    get {
+      return jsonData?["subtype"]?.string
+    }
+  }
+  public var isBotMessage : Bool {
+    get {
+      guard let subtype = self.subtype else {
+        return false
+      }
+      log.debug(subtype)
+      return subtype == "bot_message"
+    }
+  }
   public init(rawdata:Data? = nil, jsondata: JSON?) throws {
     var jsonval1 = jsondata
 
