@@ -57,8 +57,8 @@ public class Bot {
     do {
       var response :Response
       response = try client.get("/api/rtm.start?token=" + self.botToken)
-        let json = try JSONParser().parse(response.body.buffer)
-        self.webSocketUri = try URI(json["url"]!.string!)
+      let json = try JSONParser().parse(response.body.buffer!)
+      self.webSocketUri = try URI(string:json["url"]!.string!)
       self.botInfo = BotInfo(json:json)
     } catch {
       throw Error.RTMConnectionError
