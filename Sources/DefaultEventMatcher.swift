@@ -1,6 +1,6 @@
 import Data
 import JSON
-
+import Log
 
 public class DefaultEventMatcher : EventMatcher {
   public enum Error : ErrorType {
@@ -18,7 +18,7 @@ public class DefaultEventMatcher : EventMatcher {
     if MessageEvent.isJSOMMatch(jsondata) {
       return try MessageEvent(rawdata: nil,jsondata: jsondata)
     }
-    print(jsondata)
+    log.debug(jsondata)
     return nil
   }
 }

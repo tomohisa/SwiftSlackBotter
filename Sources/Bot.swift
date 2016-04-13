@@ -3,6 +3,9 @@ import Environment
 import HTTPSClient
 import JSON
 import Event
+import Log
+
+public let log = Log(levels:.Info)
 
 public class Bot {
   public enum Error: ErrorType {
@@ -28,6 +31,7 @@ public class Bot {
       return self.teamInfo?["self"]?["id"]?.string
     }
   }
+  public
 
   var observers = [EventObserver]()
   public func addObserver(observer:EventObserver) {
@@ -72,7 +76,7 @@ public class Bot {
         self.webSocketUri = try URI(string:json["url"]!.string!)
       #endif
       self.teamInfo = json
-      print(json)
+      log.trace(json)
     } catch {
       throw Error.RTMConnectionError
     }
@@ -97,9 +101,9 @@ public class Bot {
     socket.onText { (message: String) in try self.parseSlackEvent(message) }
     socket.onPing { (data) in try socket.pong() }
     socket.onPong { (data) in try socket.ping() }
-    socket.onBinary { (data) in print(data) }
+    socket.onBinary { (data) in log.debug(data) }
     socket.onClose { (code: CloseCode?, reason: String?) in
-        print("close with code: \(code ?? .NoStatus), reason: \(reason ?? "no reason")")
+        log.info("close with code: \(code ?? .NoStatus), reason: \(reason ?? "no reason")")
     }
     self.socketToSend = socket
   }
