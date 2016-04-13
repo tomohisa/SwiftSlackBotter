@@ -27,14 +27,13 @@ public class Bot {
       return self.teamInfo?["self"]?["id"]?.string
     }
   }
+  var observers = [EventObserver]()
 
-  private let eventEmitter : EventEmitter<(RTMEvent,Bot)> = EventEmitter<(RTMEvent,Bot)>()
-  public func onEvent(listen: EventListener<(RTMEvent,Bot)>.Listen) -> EventListener<(RTMEvent,Bot)> {
-      return eventEmitter.addListener(listen: listen)
+  public func addObserver(observer:EventObserver) {
+    observers.append(observer)
   }
 
   private let headers: Headers = ["Content-Type": "application/x-www-form-urlencoded"]
-
 
   public init (token: String? = nil, event_matcher : EventMatcher = DefaultEventMatcher()) throws {
     if token == nil {
@@ -109,7 +108,9 @@ public class Bot {
     guard let event = try self.eventMatcher.matchWithJSONData(eventJson) else {
       return;
     }
-    try self.eventEmitter.emit((event,self));
+    for observer in observers {
+      try observer.onEvent(event, bot:self)
+    }
   }
 
   public func reply(message:String,event:MessageEvent) throws {
