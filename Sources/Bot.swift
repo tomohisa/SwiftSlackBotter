@@ -12,6 +12,7 @@ public class Bot {
     case TokenError
     case InitializeError
     case EventUnmatchError
+    case PostFailedError
   }
   let botToken : String
   var webSocketUri : URI?
@@ -20,6 +21,12 @@ public class Bot {
   let eventMatcher : EventMatcher
   var uniqueReplyId : Int = 1
   var socketToSend: Socket? = nil
+  var teamInfo : JSON? = nil
+  public var botId : String? {
+    get {
+      return self.teamInfo?["self"]?["id"]?.string
+    }
+  }
 
   private let eventEmitter : EventEmitter<(RTMEvent,Bot)> = EventEmitter<(RTMEvent,Bot)>()
   public func onEvent(listen: EventListener<(RTMEvent,Bot)>.Listen) -> EventListener<(RTMEvent,Bot)> {
@@ -64,7 +71,8 @@ public class Bot {
         let json = try JSONParser().parse(Data(response.body.buffer!))
         self.webSocketUri = try URI(string:json["url"]!.string!)
       #endif
-
+      self.teamInfo = json
+      print(json)
     } catch {
       throw Error.RTMConnectionError
     }
@@ -104,25 +112,14 @@ public class Bot {
     try self.eventEmitter.emit((event,self));
   }
 
-  public func reply(message:String,event:MessageEvent) {
+  public func reply(message:String,event:MessageEvent) throws {
     guard let channel:String = event.channel else {
       return
     }
-    let reply : JSON = ["channel":"\(channel)",
-                "text": "\(message)"]
-    print("reply : \(reply)")
-    let post: String = JSONSerializer().serializeToString(reply)
-    guard let socket = self.socketToSend else {
-      return
-    }
     do {
-      print("posting : \(post)")
-      try socket.send(post)
-    } catch let error {
-      print("Error: \(error)")
-      return
+          try client.post("/api/chat.postMessage", headers: headers, body: "token=\(self.botToken)&channel=\(channel)&text=\(message)&as_user=true")
+    } catch { throw Error.PostFailedError
     }
-    self.uniqueReplyId += 1
   }
 
   private func postMessage(channel: String, text: String) {
