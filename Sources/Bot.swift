@@ -24,16 +24,9 @@ public class Bot {
   let eventMatcher : EventMatcher
   var uniqueReplyId : Int = 1
   var socketToSend: Socket? = nil
+  public var botInfo : BotInfo = BotInfo()
 
-  var teamInfo : JSON? = nil
-  public var botId : String? {
-    get {
-      return self.teamInfo?["self"]?["id"]?.string
-    }
-  }
-  public
-
-  var observers = [EventObserver]()
+  public var observers = [EventObserver]()
   public func addObserver(observer:EventObserver) {
     observers.append(observer)
   }
@@ -75,7 +68,7 @@ public class Bot {
         let json = try JSONParser().parse(Data(response.body.buffer!))
         self.webSocketUri = try URI(string:json["url"]!.string!)
       #endif
-      self.teamInfo = json
+      self.botInfo = BotInfo(json:json)
       log.trace(json)
     } catch {
       throw Error.RTMConnectionError
@@ -127,7 +120,7 @@ public class Bot {
 
   public func postMessage(channel: String, text:String, asUser:Bool = true, botName:String?=nil) throws {
     do {
-      let body = "token=\(self.botToken)&channel=\(channel)&text=\(text)&asUser=\(asUser)" + (botName == nil ? "" : "&username=\(botName)")
+      let body = "token=\(self.botToken)&channel=\(channel)&text=\(text)&as_user=\(asUser)" + (botName == nil ? "" : "&username=\(botName)")
           try client.post("/api/chat.postMessage", headers: headers, body: body)
     } catch { throw Error.PostFailedError }
   }
