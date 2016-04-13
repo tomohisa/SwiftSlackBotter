@@ -18,12 +18,10 @@ public class Bot {
     case PostFailedError
   }
   let botToken : String
-  var webSocketUri : URI?
+  var webSocketUri : URI? = nil
   let client : HTTPSClient.Client
-  var webSocketClient : WebSocket.Client?
+  var webSocketClient : WebSocket.Client? = nil
   let eventMatcher : EventMatcher
-  var uniqueReplyId : Int = 1
-  var socketToSend: Socket? = nil
   public var botInfo : BotInfo = BotInfo()
 
   public var observers = [EventObserver]()
@@ -42,8 +40,6 @@ public class Bot {
     }else{
       self.botToken = token!
     }
-    self.webSocketUri = nil
-    self.webSocketClient = nil
     self.eventMatcher = event_matcher
     do {
       self.client = try Client(host:"slack.com", port:443)
@@ -61,15 +57,9 @@ public class Bot {
     do {
       var response :Response
       response = try client.get("/api/rtm.start?token=" + self.botToken)
-      #if false
         let json = try JSONParser().parse(response.body.buffer)
         self.webSocketUri = try URI(json["url"]!.string!)
-      #else
-        let json = try JSONParser().parse(Data(response.body.buffer!))
-        self.webSocketUri = try URI(string:json["url"]!.string!)
-      #endif
       self.botInfo = BotInfo(json:json)
-      log.trace(json)
     } catch {
       throw Error.RTMConnectionError
     }
@@ -98,12 +88,9 @@ public class Bot {
     socket.onClose { (code: CloseCode?, reason: String?) in
         log.info("close with code: \(code ?? .NoStatus), reason: \(reason ?? "no reason")")
     }
-    self.socketToSend = socket
   }
   func parseSlackEvent(message: String) throws {
-    let eventJson = try JSONParser().parse(message.data)
-
-    guard let event = try self.eventMatcher.matchWithJSONData(eventJson) else {
+    guard let event = try self.eventMatcher.matchWithJSONData(try JSONParser().parse(message.data)) else {
       return;
     }
     for observer in observers {
