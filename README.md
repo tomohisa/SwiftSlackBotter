@@ -303,7 +303,7 @@ Bot Start Running and bot user in Slack become Green. There are two way to talk 
 
 Now if you talk anything in channel or Direct Message bot can listen, Bot reply and call your name like following image.
 
-!https://dl.dropboxusercontent.com/u/1157820/botsample.png
+!(https://dl.dropboxusercontent.com/u/1157820/botsample.png)
 
 ## Roadmap
 This framework is building for specific project so it's not general-perpose use *Yet*. I am trying to make extensible and flexible using swift's closures and protocols. I want to make folloing feature if possible.
