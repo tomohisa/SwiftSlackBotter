@@ -2,6 +2,10 @@ import WebSocket
 import Environment
 import HTTPSClient
 import JSON
+import Event
+import Log
+
+public let log = Log(levels:.Info)
 
 public class Bot {
   public enum Error: ErrorType {
@@ -10,14 +14,24 @@ public class Bot {
     case SocketConnectionError
     case TokenError
     case InitializeError
+    case EventUnmatchError
+    case PostFailedError
   }
   let botToken : String
-  var webSocketUri : URI?
+  var webSocketUri : URI? = nil
   let client : HTTPSClient.Client
+  var webSocketClient : WebSocket.Client? = nil
+  let eventMatcher : EventMatcher
+  public var botInfo : BotInfo = BotInfo()
+
+  public var observers = [EventObserver]()
+  public func addObserver(observer:EventObserver) {
+    observers.append(observer)
+  }
+
   private let headers: Headers = ["Content-Type": "application/x-www-form-urlencoded"]
 
-
-  public init (token: String? = nil) throws {
+  public init (token: String? = nil, event_matcher : EventMatcher = DefaultEventMatcher()) throws {
     if token == nil {
       guard let t = Environment().getVar("SLACK_BOT_TOKEN") else {
         throw Error.TokenError
@@ -26,7 +40,7 @@ public class Bot {
     }else{
       self.botToken = token!
     }
-    self.webSocketUri = nil
+    self.eventMatcher = event_matcher
     do {
       self.client = try Client(host:"slack.com", port:443)
     } catch {
@@ -43,14 +57,9 @@ public class Bot {
     do {
       var response :Response
       response = try client.get("/api/rtm.start?token=" + self.botToken)
-      #if false
-        let json = try JSONParser().parse(response.body.buffer)
-        self.webSocketUri = try URI(json["url"]!.string!)
-      #else
-        let json = try JSONParser().parse(Data(response.body.buffer!))
-        self.webSocketUri = try URI(string:json["url"]!.string!)
-      #endif
-
+      let json = try JSONParser().parse(response.body.buffer!)
+      self.webSocketUri = try URI(string:json["url"]!.string!)
+      self.botInfo = BotInfo(json:json)
     } catch {
       throw Error.RTMConnectionError
     }
@@ -61,11 +70,11 @@ public class Bot {
       throw Error.RTMConnectionError
     }
     do {
-      let sc = try WebSocket.Client(ssl: true, host: uri.host!, port: 443) {
+      self.webSocketClient = try WebSocket.Client(ssl: true, host: uri.host!, port: 443) {
                   (socket: Socket) throws -> Void in
                   self.setupSocket(socket)
               }
-      try sc.connect(uri.description)
+      try self.webSocketClient!.connect(uri.description)
     } catch {
       throw Error.SocketConnectionError
     }
@@ -75,29 +84,31 @@ public class Bot {
     socket.onText { (message: String) in try self.parseSlackEvent(message) }
     socket.onPing { (data) in try socket.pong() }
     socket.onPong { (data) in try socket.ping() }
-    socket.onBinary { (data) in print(data) }
+    socket.onBinary { (data) in log.debug(data) }
     socket.onClose { (code: CloseCode?, reason: String?) in
-        print("close with code: \(code ?? .NoStatus), reason: \(reason ?? "no reason")")
+        log.info("close with code: \(code ?? .NoStatus), reason: \(reason ?? "no reason")")
     }
   }
   func parseSlackEvent(message: String) throws {
-    let eventDict = try JSONParser().parse(message.data).asDictionary()
-    print(eventDict)
-    guard let type = eventDict["type"]?.string,
-          let text = eventDict["text"]?.string,
-          let channel = eventDict["channel"]?.string
-    else { return }
-    if type == "message" && text == "sfb" {
-        self.postToSlack(channel)
+    guard let event = try self.eventMatcher.matchWithJSONData(try JSONParser().parse(message.data)) else {
+      return;
+    }
+    for observer in observers {
+      try observer.onEvent(event, bot:self)
     }
   }
 
-  private func postMessage(channel: String, text: String) {
-    do {
-          try client.post("/api/chat.postMessage", headers: headers, body: "token=\(self.botToken)&channel=\(channel)&text=\(text)")
-    } catch {}
+  public func reply(message:String,event:MessageEvent) throws {
+    guard let channel:String = event.channel else {
+      return
+    }
+    try self.postMessage(channel,text:message,asUser:true)
   }
-  private func postToSlack(channel: String) {
-    postMessage(channel, text: "Hi! from server")
+
+  public func postMessage(channel: String, text:String, asUser:Bool = true, botName:String?=nil) throws {
+    do {
+      let body = "token=\(self.botToken)&channel=\(channel)&text=\(text)&as_user=\(asUser)" + (botName == nil ? "" : "&username=\(botName)")
+          try client.post("/api/chat.postMessage", headers: headers, body: body)
+    } catch { throw Error.PostFailedError }
   }
 }
