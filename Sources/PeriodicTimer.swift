@@ -1,0 +1,5 @@
+import SwiftSlackBotter
+
+protocol PeriodicTimer {
+
+}
