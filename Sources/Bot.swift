@@ -1,31 +1,10 @@
-// Bot.swift
-// The MIT License (MIT)
-//
-// Copyright (c) 2016 J-Tech Creations, Inc.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
 import WebSocket
 import Environment
 import HTTPSClient
 import JSON
 import Event
 import Log
+import Venice
 
 public let log = Log(levels:.Info)
 
@@ -45,10 +24,47 @@ public class Bot {
   var webSocketClient : WebSocket.Client? = nil
   let eventMatcher : EventMatcher
   public var botInfo : BotInfo = BotInfo()
-
+  public var isBotActive : Bool = false
   public var observers = [EventObserver]()
   public func addObserver(observer:EventObserver) {
     observers.append(observer)
+  }
+
+  public var periodicBots = [PeriodicBotService]()
+  public func add(periodicBot b:PeriodicBotService) {
+    periodicBots.append(b)
+    log.debug("added to array")
+    co { [weak self] in
+      log.debug("in co b.done= \(b.done)")
+      while b.done == false {
+        log.debug("in while")
+        guard let wself = self else { break }
+        guard wself.isBotActive else {
+          nap(10 * second)
+          log.debug("waiting for bot to become active ...")
+          continue
+        }
+        do {
+          log.debug("in do")
+          if let serviceCall = b.serviceCall {
+            log.debug("running periodic bot...")
+            try serviceCall(wself)
+            log.debug("finished running periodic bot...")
+          }
+        } catch let error {
+          if let onError = b.onError {
+            onError(error)
+          }
+          log.info("Error on Periodic Service Bot\(error)")
+        }
+        nap(b.frequency)
+      }
+      guard let wself = self else { return }
+      for (index, _) in wself.periodicBots.enumerate() {
+        wself.periodicBots.removeAtIndex(index)
+        break
+      }
+    }
   }
 
   private let headers: Headers = ["Content-Type": "application/x-www-form-urlencoded"]
@@ -82,6 +98,7 @@ public class Bot {
       let json = try JSONParser().parse(response.body.buffer!)
       self.webSocketUri = try URI(string:json["url"]!.string!)
       self.botInfo = BotInfo(json:json)
+      self.isBotActive = true
     } catch {
       throw Error.RTMConnectionError
     }
