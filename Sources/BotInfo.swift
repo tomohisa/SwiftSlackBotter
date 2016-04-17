@@ -117,4 +117,35 @@ public struct BotInfo {
     }
     return ""
   }
+  public func userIdFor(username name:String?) -> String {
+    guard let name = name else {
+      return ""
+    }
+    for user in users {
+      if user.name == name {
+        if let userid = user.id {
+          return userid
+        } else { return "" }
+      }
+    }
+    return ""
+  }
+  public func directMessageIdFor(userid id: String?) -> String {
+    guard let id = id else {
+      return ""
+    }
+    for directMessage in directMessages {
+      if directMessage.user == id {
+        guard let directMessageId = directMessage.id else { return "" }
+        return directMessageId
+      }
+    }
+    return ""
+  }
+  public func directMessageIdFor(username name: String?) -> String {
+    guard let name = name else {
+      return ""
+    }
+    return directMessageIdFor(userid:userIdFor(username: name))
+  }
 }

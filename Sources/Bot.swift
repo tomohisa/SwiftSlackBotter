@@ -133,4 +133,7 @@ public class Bot {
           try client.post("/api/chat.postMessage", headers: headers, body: body)
     } catch { throw Error.PostFailedError }
   }
+  public func postDirectMessage(username name: String, text:String, asUser:Bool = true, botName:String?=nil) throws {
+    try postMessage(botInfo.directMessageIdFor(username:name),text:text , asUser:asUser, botName:botName)
+  }
 }
