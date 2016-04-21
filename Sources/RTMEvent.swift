@@ -20,7 +20,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-import Data
 import JSON
 // Based on following information
 // https://api.slack.com/events
@@ -32,6 +31,6 @@ public protocol RTMEvent {
   static func isJSOMMatch(jsondata: JSON) -> Bool
 }
 
-public enum RTMEventError : ErrorType {
+public enum RTMEventError : ErrorProtocol {
   case InvalidType
 }

@@ -23,17 +23,17 @@
 import Venice
 public protocol PeriodicBotService {
   var done : Bool { get set }
-  var frequency : Duration { get set }
+  var frequency : Double { get set }
   var serviceCall : (Bot throws -> Void)? { get set }
-  var onError : (ErrorType -> Void)? { get set }
+  var onError : (ErrorProtocol -> Void)? { get set }
 }
 
 public struct DefaultBotService : PeriodicBotService {
   public var done : Bool = false
-  public var frequency : Duration
+  public var frequency : Double
   public var serviceCall : (Bot throws -> Void)? = nil
-  public var onError : (ErrorType -> Void)? = nil
-  public init(frequency f:Duration, onService: (Bot throws -> Void)? = nil) {
+  public var onError : (ErrorProtocol -> Void)? = nil
+  public init(frequency f:Double, onService: (Bot throws -> Void)? = nil) {
     self.frequency = f
     serviceCall = onService
   }

@@ -20,7 +20,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-import Data
 import JSON
 import Log
 
@@ -42,7 +41,7 @@ public struct MessageEvent : RTMEvent {
       guard let subtype = self.subtype else {
         return false
       }
-      log.debug(subtype)
+      logger.debug(subtype)
       return subtype == "bot_message"
     }
   }
@@ -53,7 +52,7 @@ public struct MessageEvent : RTMEvent {
       guard let rawdata = rawdata else {
         throw RTMEventError.InvalidType
       }
-      jsonval1 = try JSONParser().parse(rawdata)
+      jsonval1 = try JSONParser().parse(data: rawdata)
     }
     guard let jsonval = jsonval1 else {
       throw RTMEventError.InvalidType

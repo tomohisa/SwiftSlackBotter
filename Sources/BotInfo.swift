@@ -36,7 +36,7 @@ public struct BotInfo {
 
   public init(json:JSON? = nil) {
     self.json = json
-    log.debug(json)
+    logger.debug(json)
     if let users = json?["users"]?.array {
       for user in users {
         self.users.append(SlackUser(json:user))

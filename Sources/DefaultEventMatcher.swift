@@ -20,27 +20,26 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-import Data
 import JSON
 import Log
 
 public class DefaultEventMatcher : EventMatcher {
-  public enum Error : ErrorType {
+  public enum Error : ErrorProtocol {
     case EventUnmatch
     case InvalidJson
   }
   public func matchWithRawData(rawdata: Data) throws -> RTMEvent? {
-    let eventJson: JSON = try JSONParser().parse(rawdata)
-    return try self.matchWithJSONData(eventJson)
+    let eventJson: JSON = try JSONParser().parse(data: rawdata)
+    return try self.matchWithJSONData(jsondata: eventJson)
   }
   public func matchWithJSONData(jsondata: JSON) throws -> RTMEvent? {
-    if HelloEvent.isJSOMMatch(jsondata) {
+    if HelloEvent.isJSOMMatch(jsondata: jsondata) {
       return try HelloEvent(rawdata: nil,jsondata: jsondata)
     }
-    if MessageEvent.isJSOMMatch(jsondata) {
+    if MessageEvent.isJSOMMatch(jsondata: jsondata) {
       return try MessageEvent(rawdata: nil,jsondata: jsondata)
     }
-    log.debug(jsondata)
+    logger.debug(jsondata)
     return nil
   }
 }
