@@ -77,7 +77,7 @@ public class Bot {
     }
     self.eventMatcher = event_matcher
     do {
-      self.client = try Client(uri: URI("https://slack.com"))
+      self.client = try Client(uri: URI(host:"slack.com", port:443))
     } catch {
       throw Error.InitializeError
     }
@@ -93,6 +93,7 @@ public class Bot {
       var response :Response
       response = try client.get("/api/rtm.start?token=" + self.botToken)
       let buffer = try response.body.becomeBuffer()
+      print(buffer)
       let json = try JSONParser().parse(data: buffer)
       guard let url = json["url"], uri = url.string else {
         throw Error.RTMConnectionError
