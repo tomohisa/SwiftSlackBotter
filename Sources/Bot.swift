@@ -113,10 +113,13 @@ public class Bot {
     do {
       self.webSocketClient = try WebSocket.Client(ssl: true, host: uri.host!, port: 443) {
                   (socket: Socket) throws -> Void in
+                  logger.debug("setting up socket:")
                   self.setupSocket(socket: socket)
               }
       try self.webSocketClient!.connect(uri.description)
-    } catch {
+      logger.debug("successfully connected \(self.webSocketClient)")
+    } catch let error {
+      logger.error("\(error)")
       throw Error.SocketConnectionError
     }
   }
