@@ -77,7 +77,7 @@ public class Bot {
     }
     self.eventMatcher = event_matcher
     do {
-      self.client = try Client(uri: URI(host:"slack.com", port:443))
+      self.client = try Client(uri: URI("https://slack.com"))
     } catch {
       throw Error.InitializeError
     }
@@ -111,7 +111,7 @@ public class Bot {
       throw Error.RTMConnectionError
     }
     do {
-      self.webSocketClient = try WebSocket.Client(ssl: true, host: uri.host!, port: 443) {
+      self.webSocketClient = try WebSocket.Client(uri:uri) {
                   (socket: Socket) throws -> Void in
                   logger.debug("setting up socket:")
                   self.setupSocket(socket: socket)
