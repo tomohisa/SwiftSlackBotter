@@ -1,5 +1,5 @@
 # SwiftSlackBotter
-Slack Bot Framework for Swift Linux Command Line 
+Slack Bot Framework for Swift Linux Command Line
 Created by J-Tech Creations, Inc.
 ---
 SwiftSlackBotter is Bot framework made for swift. Currently using Swift Version DEVELOPMENT-SNAPSHOT-2016-02-08-a released by Apple. Using Zewo 0.3 Frameworks and Environment 0.1 Frameworks.
@@ -53,10 +53,10 @@ on OS X.
     ```
 
 ## Install Apple Swift Package
-Using SwiftEnv install Snapshot of Feb 8
+Using SwiftEnv install Snapshot
 
 ```shell
-$ swiftenv install 2.2-SNAPSHOT-2016-02-08-a
+$ swiftenv install 2.2-SNAPSHOT-2016-05-05-a
 ```
 
 ## Install Zewo Runtime
@@ -74,11 +74,11 @@ First we need to create a directory for our app.
 mkdir SwiftBotSample && cd SwiftBotSample
 ```
 
-Then we install Swift Development Snapshot from **February 8, 2016**.
+Then we install Swift Development Snapshot from **May 3, 2016**.
 
 ```sh
-swiftenv install DEVELOPMENT-SNAPSHOT-2016-02-08-a
-swiftenv local DEVELOPMENT-SNAPSHOT-2016-02-08-a
+swiftenv install DEVELOPMENT-SNAPSHOT-2016-05-03-a
+swiftenv local DEVELOPMENT-SNAPSHOT-2016-05-03-a
 ```
 
 Now we initialize the project with Swift Package Manager (**SPM**).
@@ -110,7 +110,7 @@ import PackageDescription
 let package = Package(
     name: "SwiftBotSample",
     dependencies: [
-      .Package(url: "https://github.com/tomohisa/SwiftSlackBotter.git", majorVersion: 0, minor: 1),
+      .Package(url: "https://github.com/tomohisa/SwiftSlackBotter.git", majorVersion: 0, minor: 3),
     ]
 )
 ```
@@ -141,9 +141,9 @@ do {
 
 Very simple bot eh.
 
-### Slack Preperation 
+### Slack Preperation
 
-- Create Bot User and Copy Tokens [Bot Users | Slack] (https://api.slack.com/bot-users) 
+- Create Bot User and Copy Tokens [Bot Users | Slack] (https://api.slack.com/bot-users)
 - Save Token in Environment Value (Add following code in `~/.bash_profile` file)
 
 ```sh
@@ -308,7 +308,7 @@ Now if you talk anything in channel or Direct Message bot can listen, Bot reply 
 ## Roadmap
 This framework is building for specific project so it's not general-perpose use *Yet*. I am trying to make extensible and flexible using swift's closures and protocols. I want to make folloing feature if possible.
 
-- conversation defenetion 
+- conversation defenetion
 - timer actitity
 - app support
 
