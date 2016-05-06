@@ -56,7 +56,7 @@ on OS X.
 Using SwiftEnv install Snapshot
 
 ```shell
-$ swiftenv install 2.2-SNAPSHOT-2016-05-05-a
+$ swiftenv install 2.2-SNAPSHOT-2016-05-03-a
 ```
 
 ## Install Zewo Runtime
