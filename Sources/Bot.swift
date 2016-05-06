@@ -5,11 +5,12 @@ import JSON
 import Event
 import Log
 import Venice
+import StandardOutputAppender
 
-public let log = Log(levels:.Info)
+public let logger = Logger(name: "swiftBot-Log", appender: StandardOutputAppender(), levels: .info)
 
 public class Bot {
-  public enum Error: ErrorType {
+  public enum Error: ErrorProtocol {
     case ServerError
     case RTMConnectionError
     case SocketConnectionError
@@ -33,35 +34,31 @@ public class Bot {
   public var periodicBots = [PeriodicBotService]()
   public func add(periodicBot b:PeriodicBotService) {
     periodicBots.append(b)
-    log.debug("added to array")
     co { [weak self] in
-      log.debug("in co b.done= \(b.done)")
       while b.done == false {
-        log.debug("in while")
         guard let wself = self else { break }
         guard wself.isBotActive else {
-          nap(10 * second)
-          log.debug("waiting for bot to become active ...")
+          nap(for: 10.second)
+          logger.debug("waiting for bot to become active ...")
           continue
         }
         do {
-          log.debug("in do")
           if let serviceCall = b.serviceCall {
-            log.debug("running periodic bot...")
+            logger.debug("running periodic bot...")
             try serviceCall(wself)
-            log.debug("finished running periodic bot...")
+            logger.debug("finished running periodic bot...")
           }
         } catch let error {
           if let onError = b.onError {
             onError(error)
           }
-          log.info("Error on Periodic Service Bot\(error)")
+          logger.info("Error on Periodic Service Bot\(error)")
         }
-        nap(b.frequency)
+        nap(for: b.frequency)
       }
       guard let wself = self else { return }
-      for (index, _) in wself.periodicBots.enumerate() {
-        wself.periodicBots.removeAtIndex(index)
+      for (index, _) in wself.periodicBots.enumerated() {
+        wself.periodicBots.remove(at: index)
         break
       }
     }
@@ -80,7 +77,7 @@ public class Bot {
     }
     self.eventMatcher = event_matcher
     do {
-      self.client = try Client(host:"slack.com", port:443)
+      self.client = try Client(uri: URI("https://slack.com"))
     } catch {
       throw Error.InitializeError
     }
@@ -95,8 +92,13 @@ public class Bot {
     do {
       var response :Response
       response = try client.get("/api/rtm.start?token=" + self.botToken)
-      let json = try JSONParser().parse(response.body.buffer!)
-      self.webSocketUri = try URI(string:json["url"]!.string!)
+      let buffer = try response.body.becomeBuffer()
+      print(buffer)
+      let json = try JSONParser().parse(data: buffer)
+      guard let url = json["url"], uri = url.string else {
+        throw Error.RTMConnectionError
+      }
+      self.webSocketUri = try URI(uri)
       self.botInfo = BotInfo(json:json)
       self.isBotActive = true
     } catch {
@@ -109,31 +111,34 @@ public class Bot {
       throw Error.RTMConnectionError
     }
     do {
-      self.webSocketClient = try WebSocket.Client(ssl: true, host: uri.host!, port: 443) {
+      self.webSocketClient = try WebSocket.Client(uri:uri) {
                   (socket: Socket) throws -> Void in
-                  self.setupSocket(socket)
+                  logger.debug("setting up socket:")
+                  self.setupSocket(socket: socket)
               }
       try self.webSocketClient!.connect(uri.description)
-    } catch {
+      logger.debug("successfully connected \(self.webSocketClient)")
+    } catch let error {
+      logger.error("\(error)")
       throw Error.SocketConnectionError
     }
   }
 
   func setupSocket(socket: Socket) {
-    socket.onText { (message: String) in try self.parseSlackEvent(message) }
+    socket.onText { (message: String) in try self.parseSlackEvent(message: message) }
     socket.onPing { (data) in try socket.pong() }
     socket.onPong { (data) in try socket.ping() }
-    socket.onBinary { (data) in log.debug(data) }
+    socket.onBinary { (data) in logger.debug(data) }
     socket.onClose { (code: CloseCode?, reason: String?) in
-        log.info("close with code: \(code ?? .NoStatus), reason: \(reason ?? "no reason")")
+        logger.info("close with code: \(code ?? .NoStatus), reason: \(reason ?? "no reason")")
     }
   }
   func parseSlackEvent(message: String) throws {
-    guard let event = try self.eventMatcher.matchWithJSONData(try JSONParser().parse(message.data)) else {
+    guard let event = try self.eventMatcher.matchWithJSONData(jsondata: try JSONParser().parse(data: message.data)) else {
       return;
     }
     for observer in observers {
-      try observer.onEvent(event, bot:self)
+      try observer.onEvent(event: event, bot:self)
     }
   }
 
@@ -141,7 +146,7 @@ public class Bot {
     guard let channel:String = event.channel else {
       return
     }
-    try self.postMessage(channel,text:message,asUser:true)
+    try self.postMessage(channel: channel,text:message,asUser:true)
   }
 
   public func postMessage(channel: String, text:String, asUser:Bool = true, botName:String?=nil) throws {
@@ -151,6 +156,6 @@ public class Bot {
     } catch { throw Error.PostFailedError }
   }
   public func postDirectMessage(username name: String, text:String, asUser:Bool = true, botName:String?=nil) throws {
-    try postMessage(botInfo.directMessageIdFor(username:name),text:text , asUser:asUser, botName:botName)
+    try postMessage(channel: botInfo.directMessageIdFor(username:name),text:text , asUser:asUser, botName:botName)
   }
 }

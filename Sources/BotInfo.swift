@@ -36,23 +36,26 @@ public struct BotInfo {
 
   public init(json:JSON? = nil) {
     self.json = json
-    log.debug(json)
-    if let users = json?["users"]?.array {
+    guard let json = json else {
+      return
+    }
+    logger.debug(json)
+    if let users = json["users"]?.array {
       for user in users {
         self.users.append(SlackUser(json:user))
       }
     }
-    if let channels = json?["channels"]?.array {
+    if let channels = json["channels"]?.array {
       for channel in channels {
         self.channels.append(SlackChannel(json:channel))
       }
     }
-    if let privateChannels = json?["groups"]?.array {
+    if let privateChannels = json["groups"]?.array {
       for privateChannel in privateChannels {
         self.privateChannels.append(SlackGroup(json:privateChannel))
       }
     }
-    if let directMessages = json?["ims"]?.array {
+    if let directMessages = json["ims"]?.array {
       for im in directMessages {
         self.directMessages.append(SlackDirectMessage(json:im))
       }
