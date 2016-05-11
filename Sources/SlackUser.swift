@@ -23,14 +23,14 @@
 import JSON
 
 public struct SlackUser {
-  let tz : String?
-  let tz_offset : Int?
-  let name : String?
-  let tz_label : String?
-  let id : String?
-  let real_name : String?
-  let team_id : String?
-  let json : JSON?
+  public let tz : String?
+  public let tz_offset : Int?
+  public let name : String?
+  public let tz_label : String?
+  public let id : String?
+  public let real_name : String?
+  public let team_id : String?
+  public let json : JSON?
   public init(json:JSON) {
     self.json = json
     self.tz = json["tz"]?.string
