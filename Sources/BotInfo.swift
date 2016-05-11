@@ -98,6 +98,17 @@ public struct BotInfo {
     }
     return false
   }
+    public func userFor(id:String?) -> SlackUser? {
+        guard let id = id else {
+            return nil
+        }
+        for user in users {
+            if user.id == id {
+                return user
+            }
+        }
+        return nil
+    }
   public func usernameFor(id:String?) -> String {
     guard let id = id else {
       return ""
