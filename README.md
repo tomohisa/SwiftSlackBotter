@@ -56,7 +56,7 @@ on OS X.
 Using SwiftEnv install Snapshot
 
 ```shell
-$ swiftenv install 2.2-SNAPSHOT-2016-05-03-a
+$ swiftenv install 2.2-SNAPSHOT-2016-05-09-a
 ```
 
 ## Install Zewo Runtime
@@ -74,11 +74,11 @@ First we need to create a directory for our app.
 mkdir SwiftBotSample && cd SwiftBotSample
 ```
 
-Then we install Swift Development Snapshot from **May 3, 2016**.
+Then we install Swift Development Snapshot from **May 9, 2016**.
 
 ```sh
-swiftenv install DEVELOPMENT-SNAPSHOT-2016-05-03-a
-swiftenv local DEVELOPMENT-SNAPSHOT-2016-05-03-a
+swiftenv install DEVELOPMENT-SNAPSHOT-2016-05-09-a
+swiftenv local DEVELOPMENT-SNAPSHOT-2016-05-09-a
 ```
 
 Now we initialize the project with Swift Package Manager (**SPM**).
