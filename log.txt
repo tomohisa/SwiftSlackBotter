@@ -1,1 +1,1 @@
-Cloning https://github.com/Zewo/WebSocket.git
+Compile Swift Module 'SwiftSlackBotter' (13 sources)
