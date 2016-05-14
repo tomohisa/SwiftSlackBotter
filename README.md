@@ -2,13 +2,13 @@
 Slack Bot Framework for Swift Linux Command Line
 Created by J-Tech Creations, Inc.
 ---
-SwiftSlackBotter is Bot framework made for swift. Currently using Swift Version DEVELOPMENT-SNAPSHOT-2016-02-08-a released by Apple. Using Zewo 0.3 Frameworks and Environment 0.1 Frameworks.
+SwiftSlackBotter is Bot framework made for swift. Currently using Swift Version DEVELOPMENT-SNAPSHOT-2016-05-09-a released by Apple. Using Zewo 0.7 Frameworks and Environment 0.1 Frameworks.
 
 - [Zewo](https://github.com/Zewo/Zewo)
 - [Environment](https://github.com/czechboy0/Environment)
 
 # How to Setup Environment
-On this Readme, it focues for OSX El Capitan, but please see each sofware explains how on linux as well (I still haven't try on linux)
+On this Readme, it focues for OSX El Capitan, but please see each sofware explains how on linux as well (Currently linux version is working fine.)
 
 ## Install Homebrew (If you have not already done it)
 
