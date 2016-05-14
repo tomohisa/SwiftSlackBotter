@@ -19,7 +19,7 @@ On this Readme, it focues for OSX El Capitan, but please see each sofware explai
 ```
 
 ## Install Swift Env
-[SwiftEnv](https://github.com/kylef/swiftenv) is a swift version manager to select swift snapshot by user / folder. Since Swift Slack Botter uses DEVELOPMENT-SNAPSHOT-2016-02-08-a (Older Version), I reccomend you to use this to be able to choose specific Swift Runtime
+[SwiftEnv](https://github.com/kylef/swiftenv) is a swift version manager to select swift snapshot by user / folder. Since Swift Slack Botter uses DEVELOPMENT-SNAPSHOT-2016-05-09-a , I reccomend you to use this to be able to choose specific Swift Runtime
 
 You can install swiftenv using the [Homebrew](http://brew.sh/) package manager
 on OS X.
@@ -56,7 +56,7 @@ on OS X.
 Using SwiftEnv install Snapshot
 
 ```shell
-$ swiftenv install 2.2-SNAPSHOT-2016-05-09-a
+$ swiftenv install DEVELOPMENT-SNAPSHOT-2016-05-09-a
 ```
 
 ## Install Zewo Runtime
