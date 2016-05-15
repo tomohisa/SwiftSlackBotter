@@ -18,6 +18,7 @@ public class Bot {
     case InitializeError
     case EventUnmatchError
     case PostFailedError
+    case ReactFails
   }
   let botToken : String
   var webSocketUri : URI? = nil
@@ -154,6 +155,17 @@ public class Bot {
       let body = "token=\(self.botToken)&channel=\(channel)&text=\(text)&as_user=\(asUser)" + (botName == nil ? "" : "&username=\(botName)")
           try client.post("/api/chat.postMessage", headers: headers, body: body)
     } catch { throw Error.PostFailedError }
+  }
+  public func react(message:MessageEvent,with name:String) throws {
+    do {
+      guard let channel = message.channel, timestamp = message.ts else {
+        throw Error.ReactFails
+      }
+      let body = "token=\(self.botToken)&name=\(name)&channel=\(channel)&timestamp=\(timestamp)"
+      try client.post("/api/reactions.add", headers: headers, body: body)
+    } catch {
+      throw Error.ReactFails
+    }
   }
   public func postDirectMessage(username name: String, text:String, asUser:Bool = true, botName:String?=nil) throws {
     try postMessage(channel: botInfo.directMessageIdFor(username:name),text:text , asUser:asUser, botName:botName)
