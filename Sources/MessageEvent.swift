@@ -23,6 +23,13 @@
 import JSON
 import Log
 
+public struct Reactions {
+    public var count : Int = 0
+    public var name : String = ""
+    public var users : [String] = []
+}
+
+
 public struct MessageEvent : RTMEvent {
   public var type : String
   public var rawData : Data?
@@ -31,6 +38,7 @@ public struct MessageEvent : RTMEvent {
   public let user : String?
   public let text : String?
   public let ts : String?
+  public var reactions : [Reactions] = []
   public var subtype : String? {
     get {
       return jsonData?["subtype"]?.string
@@ -68,6 +76,19 @@ public struct MessageEvent : RTMEvent {
     self.user = jsonval["user"] == nil ? nil : jsonval["user"]!.string
     self.text = jsonval["text"] == nil ? nil : jsonval["text"]!.string
     self.ts = jsonval["ts"] == nil ? nil : jsonval["ts"]!.string
+    if let reactions = jsonval["reactions"]?.array {
+        for reaction in reactions {
+            var r = Reactions()
+            if let count = reaction["count"]?.int { r.count = count }
+            if let name = reaction["name"]?.string { r.name = name }
+            if let users = reaction["users"]?.array {
+                for user in users {
+                    if let userid = user.string { r.users.append(userid) }
+                }
+            }
+            self.reactions.append(r)
+        }
+    }
   }
   public static func isJSOMMatch(jsondata: JSON) -> Bool {
     guard let type = jsondata["type"] else {
