@@ -34,10 +34,10 @@ public struct MessageEvent : RTMEvent {
   public var type : String
   public var rawData : Data?
   public var jsonData : JSON?
-  public let channel : String?
-  public let user : String?
-  public let text : String?
-  public let ts : String?
+  public var channel : String?
+  public var user : String?
+  public var text : String?
+  public var ts : String?
   public var reactions : [Reactions] = []
   public var subtype : String? {
     get {
