@@ -180,7 +180,9 @@ public class Bot {
             if json["type"]?.string != "message" { return nil }
             guard let messageJson = json["message"] else { return nil }
             guard MessageEvent.isJSOMMatch(jsondata: messageJson) else { return nil }
-            return try MessageEvent(rawdata: nil,jsondata: messageJson)
+            var result =  try MessageEvent(rawdata: nil,jsondata: messageJson)
+            result.channel = channel
+            return result
         } catch {
             throw Error.ReactFails
         }
@@ -190,4 +192,3 @@ public class Bot {
         try postMessage(channel: botInfo.directMessageIdFor(username:name),text:text , asUser:asUser, botName:botName)
     }
 }
- 
