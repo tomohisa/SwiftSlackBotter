@@ -1,4 +1,4 @@
-// MessageEvent.swift
+// ReactionAddedEvent.swift
 // The MIT License (MIT)
 //
 // Copyright (c) 2016 J-Tech Creations, Inc.
@@ -23,36 +23,16 @@
 import JSON
 import Log
 
-public struct Reactions {
-    public var count : Int = 0
-    public var name : String = ""
-    public var users : [String] = []
-}
-
-
-public struct MessageEvent : RTMEvent {
+public struct ReactionAddedEvent : RTMEvent {
   public var type : String
   public var rawData : Data?
   public var jsonData : JSON?
-  public var channel : String?
   public var user : String?
-  public var text : String?
+  public var reaction : String?
   public var ts : String?
-  public var reactions : [Reactions] = []
-  public var subtype : String? {
-    get {
-      return jsonData?["subtype"]?.string
-    }
-  }
-  public var isBotMessage : Bool {
-    get {
-      guard let subtype = self.subtype else {
-        return false
-      }
-      logger.debug(subtype)
-      return subtype == "bot_message"
-    }
-  }
+  public var event_ts : String?
+  public var item_user : String?
+  public var item : RTMEvent? = nil
   public init(rawdata:Data? = nil, jsondata: JSON?) throws {
     var jsonval1 = jsondata
 
@@ -72,29 +52,20 @@ public struct MessageEvent : RTMEvent {
     type = typeval
     rawData = rawdata
     jsonData = jsondata
-    self.channel = jsonval["channel"] == nil ? nil : jsonval["channel"]!.string
     self.user = jsonval["user"] == nil ? nil : jsonval["user"]!.string
-    self.text = jsonval["text"] == nil ? nil : jsonval["text"]!.string
+    self.reaction = jsonval["reaction"] == nil ? nil : jsonval["reaction"]!.string
     self.ts = jsonval["ts"] == nil ? nil : jsonval["ts"]!.string
-    if let reactions = jsonval["reactions"]?.array {
-        for reaction in reactions {
-            var r = Reactions()
-            if let count = reaction["count"]?.int { r.count = count }
-            if let name = reaction["name"]?.string { r.name = name }
-            if let users = reaction["users"]?.array {
-                for user in users {
-                    if let userid = user.string { r.users.append(userid) }
-                }
-            }
-            self.reactions.append(r)
-        }
+    self.event_ts = jsonval["event_ts"] == nil ? nil : jsonval["event_ts"]!.string
+    self.item_user = jsonval["item_user"] == nil ? nil : jsonval["item_user"]!.string
+    if let messageJson = jsonval["item"] {
+      self.item = MessageEvent.isJSOMMatch(jsondata: messageJson) ? try MessageEvent(rawdata: nil,jsondata: messageJson) : nil
     }
   }
   public static func isJSOMMatch(jsondata: JSON) -> Bool {
     guard let type = jsondata["type"] else {
       return false
     }
-    if type == "message" {
+    if type == "reaction_added" {
       return true;
     }
     return false;

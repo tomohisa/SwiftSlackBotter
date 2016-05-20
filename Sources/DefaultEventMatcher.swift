@@ -39,6 +39,9 @@ public class DefaultEventMatcher : EventMatcher {
     if MessageEvent.isJSOMMatch(jsondata: jsondata) {
       return try MessageEvent(rawdata: nil,jsondata: jsondata)
     }
+    if ReactionAddedEvent.isJSOMMatch(jsondata: jsondata) {
+      return try ReactionAddedEvent(rawdata: nil,jsondata: jsondata)
+    }
     logger.debug(jsondata)
     return nil
   }
