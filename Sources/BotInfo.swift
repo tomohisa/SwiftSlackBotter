@@ -87,6 +87,20 @@ public struct BotInfo {
     }
     return nil
   }
+  public func channelIDFor(_ name:String?) -> String? {
+      guard let name = name else { return nil }
+      for channel in channels {
+        if channel.name == name && channel.is_channel {
+          return channel.id
+        }
+      }
+      for channel in privateChannels {
+        if channel.name == name && channel.is_group {
+          return channel.id
+        }
+      }
+      return nil
+  }
   public func isChannel(id:String?) -> Bool {
     guard let id = id else {
       return false

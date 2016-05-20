@@ -19,6 +19,7 @@ public class Bot {
         case EventUnmatchError
         case PostFailedError
         case ReactFails
+        case WrongChannelName
     }
     let botToken : String
     var webSocketUri : URI? = nil
@@ -147,14 +148,18 @@ public class Bot {
         guard let channel:String = event.channel else {
             return
         }
-        try self.postMessage(channel: channel,text:message,asUser:true)
+        try self.postMessage(channelID: channel,text:message,asUser:true)
     }
 
-    public func postMessage(channel: String, text:String, asUser:Bool = true, botName:String?=nil) throws {
+    public func postMessage(channelID: String, text:String, asUser:Bool = true, botName:String?=nil) throws {
         do {
-            let body = "token=\(self.botToken)&channel=\(channel)&text=\(text)&as_user=\(asUser)" + (botName == nil ? "" : "&username=\(botName)")
+            let body = "token=\(self.botToken)&channel=\(channelID)&text=\(text)&as_user=\(asUser)" + (botName == nil ? "" : "&username=\(botName)")
             try client.post("/api/chat.postMessage", headers: headers, body: body)
         } catch { throw Error.PostFailedError }
+    }
+    public func postMessage(channelName: String, text:String, asUser:Bool = true, botName:String?=nil) throws {
+        guard let channel = self.botInfo.channelIDFor(channelName) else { throw Error.WrongChannelName }
+        try postMessage(channelID: channel, text:text, asUser:asUser, botName:botName)
     }
     public func react(message:MessageEvent,with name:String) throws {
         do {
@@ -189,6 +194,6 @@ public class Bot {
     }
 
     public func postDirectMessage(username name: String, text:String, asUser:Bool = true, botName:String?=nil) throws {
-        try postMessage(channel: botInfo.directMessageIdFor(username:name),text:text , asUser:asUser, botName:botName)
+        try postMessage(channelID: botInfo.directMessageIdFor(username:name),text:text , asUser:asUser, botName:botName)
     }
 }
