@@ -32,6 +32,7 @@ public class Bot {
     public func addObserver(observer:EventObserver) {
         observers.append(observer)
     }
+    public var onConnected : ((Bot) -> Void)? = nil
 
     public var periodicBots = [PeriodicBotService]()
     public func add(periodicBot b:PeriodicBotService) {
@@ -117,6 +118,9 @@ public class Bot {
                 (socket: Socket) throws -> Void in
                 logger.debug("setting up socket:")
                 self.setupSocket(socket: socket)
+                if let onConnected = self.onConnected {
+                    onConnected(self)
+                }
             }
             try self.webSocketClient!.connect(uri.description)
             logger.debug("successfully connected \(self.webSocketClient)")
