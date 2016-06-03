@@ -131,12 +131,12 @@ public class Bot {
     }
 
     func setupSocket(socket: Socket) {
-        socket.onText { (message: String) in try self.parseSlackEvent(message: message) }
-        socket.onPing { (data) in try socket.pong() }
-        socket.onPong { (data) in try socket.ping() }
-        socket.onBinary { (data) in logger.debug(data) }
-        socket.onClose { (code: CloseCode?, reason: String?) in
-            logger.info("close with code: \(code ?? .NoStatus), reason: \(reason ?? "no reason")")
+        let _ = socket.onText { (message: String) in try self.parseSlackEvent(message: message) }
+        let _ = socket.onPing { (data) in try socket.pong() }
+        let _ = socket.onPong { (data) in try socket.ping() }
+        let _ = socket.onBinary { (data) in logger.debug(data) }
+        let _ = socket.onClose { (code: CloseCode?, reason: String?) in
+            logger.info("close with code: \(code), reason: \(reason ?? "no reason")")
         }
     }
     func parseSlackEvent(message: String) throws {
@@ -158,7 +158,7 @@ public class Bot {
     public func postMessage(channelID: String, text:String, asUser:Bool = true, botName:String?=nil) throws {
         do {
             let body = "token=\(self.botToken)&channel=\(channelID)&text=\(text)&as_user=\(asUser)" + (botName == nil ? "" : "&username=\(botName)")
-            try client.post("/api/chat.postMessage", headers: headers, body: body)
+            let _ = try client.post("/api/chat.postMessage", headers: headers, body: body)
         } catch { throw Error.PostFailedError }
     }
     public func postMessage(channelName: String, text:String, asUser:Bool = true, botName:String?=nil) throws {
@@ -171,7 +171,7 @@ public class Bot {
                 throw Error.ReactFails
             }
             let body = "token=\(self.botToken)&name=\(name)&channel=\(channel)&timestamp=\(timestamp)"
-            try client.post("/api/reactions.add", headers: headers, body: body)
+            let _ = try client.post("/api/reactions.add", headers: headers, body: body)
         } catch {
             throw Error.ReactFails
         }

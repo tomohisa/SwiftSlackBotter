@@ -1,1 +1,106 @@
+Cloning https://github.com/Zewo/WebSocket.git
+Resolved version: 0.6.3
+Cloning https://github.com/Zewo/HTTP.git
+Resolved version: 0.6.0
+Cloning https://github.com/Zewo/MediaType.git
+Resolved version: 0.6.0
+Cloning https://github.com/Zewo/String.git
+Resolved version: 0.7.2
+Cloning https://github.com/Zewo/StructuredData.git
+Resolved version: 0.7.1
+Cloning https://github.com/open-swift/C7.git
+Resolved version: 0.7.4
+Cloning https://github.com/Zewo/URI.git
+Resolved version: 0.7.4
+Cloning https://github.com/Zewo/CURIParser.git
+Resolved version: 0.5.0
+Cloning https://github.com/open-swift/S4.git
+Resolved version: 0.6.1
+Cloning https://github.com/VeniceX/HTTPClient.git
+Resolved version: 0.6.0
+Cloning https://github.com/VeniceX/TCP.git
+Resolved version: 0.7.2
+Cloning https://github.com/VeniceX/IP.git
+Resolved version: 0.7.0
+Cloning https://github.com/VeniceX/Venice.git
+Resolved version: 0.7.1
+Cloning https://github.com/VeniceX/CLibvenice.git
+Resolved version: 0.5.1
+Cloning https://github.com/Zewo/POSIX.git
+Resolved version: 0.5.0
+Cloning https://github.com/Zewo/HTTPParser.git
+Resolved version: 0.7.2
+Cloning https://github.com/Zewo/CHTTPParser.git
+Resolved version: 0.5.0
+Cloning https://github.com/Zewo/HTTPSerializer.git
+Resolved version: 0.7.1
+Cloning https://github.com/VeniceX/HTTPSClient.git
+Resolved version: 0.7.1
+Cloning https://github.com/VeniceX/TCPSSL.git
+Resolved version: 0.7.1
+Cloning https://github.com/Zewo/OpenSSL.git
+Resolved version: 0.7.4
+Cloning https://github.com/VeniceX/File.git
+Resolved version: 0.7.2
+Cloning https://github.com/Zewo/COpenSSL.git
+Resolved version: 0.6.0
+Cloning https://github.com/Zewo/Event.git
+Resolved version: 0.5.1
+Cloning https://github.com/Zewo/Base64.git
+Resolved version: 0.7.0
+Cloning https://github.com/Zewo/UUID.git
+Resolved version: 0.2.1
+Cloning https://github.com/Zewo/JSON.git
+Resolved version: 0.7.1
+Cloning https://github.com/czechboy0/Environment.git
+Resolved version: 0.3.1
+Cloning https://github.com/Zewo/Log.git
+Resolved version: 0.6.0
+Cloning https://github.com/Zewo/StandardOutputAppender.git
+Resolved version: 0.6.0
+Compile CURIParser uri_parser.c
+Compile CLibvenice unix.c
+Compile CLibvenice udp.c
+Compile CLibvenice timer.c
+Compile CLibvenice tcp.c
+Compile CLibvenice stack.c
+Compile CLibvenice slist.c
+Compile CLibvenice list.c
+Compile CLibvenice poller.c
+Compile CLibvenice ip.c
+Compile CLibvenice file.c
+Compile CLibvenice dns.c
+Compile CLibvenice debug.c
+Compile CLibvenice cr.c
+Compile CLibvenice chan.c
+Compile CHTTPParser http_parser.c
+Compile Swift Module 'String' (1 sources)
+Compile Swift Module 'C7' (22 sources)
+Compile Swift Module 'POSIX' (1 sources)
+Compile Swift Module 'Event' (2 sources)
+Compile Swift Module 'UUID' (1 sources)
+Compile Swift Module 'Environment' (1 sources)
+Linking CURIParser
+Linking CHTTPParser
+Linking CLibvenice
+Compile Swift Module 'StructuredData' (1 sources)
+Compile Swift Module 'S4' (23 sources)
+Compile Swift Module 'Venice' (11 sources)
+Compile Swift Module 'Log' (5 sources)
+Compile Swift Module 'Base64' (1 sources)
+Compile Swift Module 'StandardOutputAppender' (1 sources)
+Compile Swift Module 'URI' (1 sources)
+Compile Swift Module 'MediaType' (1 sources)
+Compile Swift Module 'JSON' (5 sources)
+Compile Swift Module 'IP' (1 sources)
+Compile Swift Module 'File' (2 sources)
+Compile Swift Module 'TCP' (3 sources)
+Compile Swift Module 'HTTPParser' (3 sources)
+Compile Swift Module 'HTTPSerializer' (3 sources)
+Compile Swift Module 'OpenSSL' (15 sources)
+Compile Swift Module 'HTTPClient' (1 sources)
+Compile Swift Module 'HTTP' (9 sources)
+Compile Swift Module 'TCPSSL' (2 sources)
+Compile Swift Module 'HTTPSClient' (1 sources)
+Compile Swift Module 'WebSocket' (6 sources)
 Compile Swift Module 'SwiftSlackBotter' (14 sources)
