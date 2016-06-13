@@ -1,4 +1,4 @@
-import WebSocket
+import WebSocketClient
 import Environment
 import HTTPSClient
 import JSON
@@ -24,7 +24,7 @@ public class Bot {
     let botToken : String
     var webSocketUri : URI? = nil
     let client : HTTPSClient.Client
-    var webSocketClient : WebSocket.Client? = nil
+    var webSocketClient : WebSocketClient.Client? = nil
     let eventMatcher : EventMatcher
     public var botInfo : BotInfo = BotInfo()
     public var isBotActive : Bool = false
@@ -114,8 +114,8 @@ public class Bot {
             throw Error.RTMConnectionError
         }
         do {
-            self.webSocketClient = try WebSocket.Client(uri:uri) {
-                (socket: Socket) throws -> Void in
+            self.webSocketClient = try WebSocketClient.Client(uri:uri) {
+                (socket: WebSocket) throws -> Void in
                 logger.debug("setting up socket:")
                 self.setupSocket(socket: socket)
                 if let onConnected = self.onConnected {
@@ -130,7 +130,7 @@ public class Bot {
         }
     }
 
-    func setupSocket(socket: Socket) {
+    func setupSocket(socket: WebSocket) {
         let _ = socket.onText { (message: String) in try self.parseSlackEvent(message: message) }
         let _ = socket.onPing { (data) in try socket.pong() }
         let _ = socket.onPong { (data) in try socket.ping() }
