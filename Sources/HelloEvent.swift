@@ -40,7 +40,7 @@ public struct HelloEvent : RTMEvent {
       throw RTMEventError.InvalidType
     }
 
-    guard let typeval = jsonval["type"]!.string else {
+    guard let typeval = jsonval["type"]!.stringValue else {
       throw RTMEventError.InvalidType
     }
     type = typeval

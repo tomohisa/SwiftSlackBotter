@@ -5,7 +5,6 @@ import JSON
 import Event
 import Log
 import Venice
-import StandardOutputAppender
 
 public let logger = Logger(name: "swiftBot-Log", appender: StandardOutputAppender(), levels: .info)
 
@@ -98,7 +97,7 @@ public class Bot {
             let buffer = try response.body.becomeBuffer()
             print(buffer)
             let json = try JSONParser().parse(data: buffer)
-            guard let url = json["url"], uri = url.string else {
+            guard let url = json["url"], uri = url.stringValue else {
                 throw Error.RTMConnectionError
             }
             self.webSocketUri = try URI(uri)
@@ -184,9 +183,9 @@ public class Bot {
             let body = "token=\(self.botToken)&channel=\(channel)&timestamp=\(timestamp)"
             var response : Response = try client.post("/api/reactions.get", headers: headers, body: body)
             let json : JSON = try JSONParser().parse(data: try response.body.becomeBuffer())
-            guard let ok = json["ok"]?.bool else { return nil }
+            guard let ok = json["ok"]?.booleanValue else { return nil }
             guard ok == true else { return nil }
-            if json["type"]?.string != "message" { return nil }
+            if json["type"]?.stringValue != "message" { return nil }
             guard let messageJson = json["message"] else { return nil }
             guard MessageEvent.isJSOMMatch(jsondata: messageJson) else { return nil }
             var result =  try MessageEvent(rawdata: nil,jsondata: messageJson)
