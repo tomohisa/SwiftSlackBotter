@@ -40,22 +40,22 @@ public struct BotInfo {
             return
         }
         logger.debug(json)
-        if let users = json["users"]?.array {
+        if let users = json["users"]?.arrayValue {
             for user in users {
                 self.users.append(SlackUser(json:user))
             }
         }
-        if let channels = json["channels"]?.array {
+        if let channels = json["channels"]?.arrayValue {
             for channel in channels {
                 self.channels.append(SlackChannel(json:channel))
             }
         }
-        if let privateChannels = json["groups"]?.array {
+        if let privateChannels = json["groups"]?.arrayValue {
             for privateChannel in privateChannels {
                 self.privateChannels.append(SlackGroup(json:privateChannel))
             }
         }
-        if let directMessages = json["ims"]?.array {
+        if let directMessages = json["ims"]?.arrayValue {
             for im in directMessages {
                 self.directMessages.append(SlackDirectMessage(json:im))
             }
@@ -63,7 +63,7 @@ public struct BotInfo {
     }
     public var botId : String? {
         get {
-            return self.json?["self"]?["id"]?.string
+            return self.json?["self"]?["id"]?.stringValue
         }
     }
     public func channelType(id:String?) -> ChannelType? {

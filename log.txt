@@ -1,63 +1,90 @@
+Cloning https://github.com/Zewo/WebSocketClient.git
+HEAD is now at 83cdad8 bump up dependencies
+Resolved version: 0.2.0
 Cloning https://github.com/Zewo/WebSocket.git
-Resolved version: 0.6.3
-Cloning https://github.com/Zewo/HTTP.git
-Resolved version: 0.6.0
-Cloning https://github.com/Zewo/MediaType.git
-Resolved version: 0.6.0
-Cloning https://github.com/Zewo/String.git
-Resolved version: 0.7.2
-Cloning https://github.com/Zewo/StructuredData.git
-Resolved version: 0.7.1
-Cloning https://github.com/open-swift/C7.git
-Resolved version: 0.7.4
-Cloning https://github.com/Zewo/URI.git
-Resolved version: 0.7.4
-Cloning https://github.com/Zewo/CURIParser.git
-Resolved version: 0.5.0
-Cloning https://github.com/open-swift/S4.git
-Resolved version: 0.6.1
-Cloning https://github.com/VeniceX/HTTPClient.git
-Resolved version: 0.6.0
-Cloning https://github.com/VeniceX/TCP.git
-Resolved version: 0.7.2
-Cloning https://github.com/VeniceX/IP.git
-Resolved version: 0.7.0
-Cloning https://github.com/VeniceX/Venice.git
-Resolved version: 0.7.1
-Cloning https://github.com/VeniceX/CLibvenice.git
-Resolved version: 0.5.1
-Cloning https://github.com/Zewo/POSIX.git
-Resolved version: 0.5.0
-Cloning https://github.com/Zewo/HTTPParser.git
-Resolved version: 0.7.2
-Cloning https://github.com/Zewo/CHTTPParser.git
-Resolved version: 0.5.0
-Cloning https://github.com/Zewo/HTTPSerializer.git
-Resolved version: 0.7.1
-Cloning https://github.com/VeniceX/HTTPSClient.git
-Resolved version: 0.7.1
-Cloning https://github.com/VeniceX/TCPSSL.git
-Resolved version: 0.7.1
-Cloning https://github.com/Zewo/OpenSSL.git
-Resolved version: 0.7.4
-Cloning https://github.com/VeniceX/File.git
-Resolved version: 0.7.2
-Cloning https://github.com/Zewo/COpenSSL.git
-Resolved version: 0.6.0
+HEAD is now at 5b4c310 Bump dependencies
+Resolved version: 0.8.0
 Cloning https://github.com/Zewo/Event.git
+HEAD is now at 20d0105 Fix warnings
 Resolved version: 0.5.1
 Cloning https://github.com/Zewo/Base64.git
+HEAD is now at 97f27c0 make decode throw
+Resolved version: 0.8.0
+Cloning https://github.com/open-swift/C7.git
+HEAD is now at 235847f Merge pull request #34 from open-swift/number
+Resolved version: 0.8.1
+Cloning https://github.com/Zewo/POSIX.git
+HEAD is now at 56fca4a Switch on errorNumber instead of errno (#5)
+Resolved version: 0.5.1
+Cloning https://github.com/Zewo/HTTP.git
+HEAD is now at 8a8ee8e use single headers
+Resolved version: 0.8.0
+Cloning https://github.com/Zewo/MediaType.git
+HEAD is now at 05e0268 update to Open Swift 0.8 (#9)
 Resolved version: 0.7.0
-Cloning https://github.com/Zewo/UUID.git
-Resolved version: 0.2.1
+Cloning https://github.com/Zewo/String.git
+HEAD is now at 03df218 Bugfix: Index range overflow error (#11)
+Resolved version: 0.7.2
+Cloning https://github.com/Zewo/URI.git
+HEAD is now at cc6c4bf Fix swift version (05-03 -> 05-09)
+Resolved version: 0.8.1
+Cloning https://github.com/Zewo/CURIParser.git
+HEAD is now at 757e0c0 add error flag
+Resolved version: 0.5.0
+Cloning https://github.com/open-swift/S4.git
+HEAD is now at 6b50036 Merge pull request #56 from open-swift/single-headers
+Resolved version: 0.9.0
+Cloning https://github.com/VeniceX/HTTPClient.git
+HEAD is now at 5df5f17 Update dependencies
+Resolved version: 0.8.0
+Cloning https://github.com/VeniceX/TCP.git
+HEAD is now at de4640c Updated Swift and IP (#11)
+Resolved version: 0.8.0
+Cloning https://github.com/VeniceX/IP.git
+HEAD is now at 8583e7c Updated Venice and Swift versions (#8)
+Resolved version: 0.8.0
+Cloning https://github.com/VeniceX/Venice.git
+HEAD is now at ad105c4 Bump Swift to 05-31 (#26)
+Resolved version: 0.8.0
+Cloning https://github.com/VeniceX/CLibvenice.git
+HEAD is now at 3df7413 Revert "Remove self-referential link"
+Resolved version: 0.5.1
+Cloning https://github.com/Zewo/HTTPParser.git
+HEAD is now at 20cda8c Updated Swift and S4 (#13)
+Resolved version: 0.9.0
+Cloning https://github.com/Zewo/CHTTPParser.git
+HEAD is now at a54bc0b Add attribution
+Resolved version: 0.5.0
+Cloning https://github.com/Zewo/HTTPSerializer.git
+HEAD is now at 6d212c2 Updated Swift and S4 (#10)
+Resolved version: 0.8.0
+Cloning https://github.com/VeniceX/HTTPSClient.git
+HEAD is now at ee0b109 Updated Swift and dependencies (#23)
+Resolved version: 0.8.0
+Cloning https://github.com/VeniceX/TCPSSL.git
+HEAD is now at 824e321 Updated Swift and dependencies (#11)
+Resolved version: 0.8.0
+Cloning https://github.com/Zewo/OpenSSL.git
+HEAD is now at 83a07d4 add sha256
+Resolved version: 0.8.3
+Cloning https://github.com/VeniceX/File.git
+HEAD is now at c655295 Updated Venice and Swift (#16)
+Resolved version: 0.8.0
+Cloning https://github.com/Zewo/COpenSSL.git
+HEAD is now at 6de34ad updated for 04-25 snapshot support
+Resolved version: 0.6.0
 Cloning https://github.com/Zewo/JSON.git
-Resolved version: 0.7.1
+HEAD is now at e4779f3 use C7 JSON
+Resolved version: 0.9.0
+Cloning https://github.com/Zewo/StructuredData.git
+HEAD is now at ee3b7ec Pull some (purely additive) changes from future version
+Resolved version: 0.8.2
 Cloning https://github.com/czechboy0/Environment.git
-Resolved version: 0.3.1
+HEAD is now at bea02e9 Simplified package.swift
+Resolved version: 0.3.2
 Cloning https://github.com/Zewo/Log.git
-Resolved version: 0.6.0
-Cloning https://github.com/Zewo/StandardOutputAppender.git
-Resolved version: 0.6.0
+HEAD is now at 4d074df Make StandardOutputAppender initializer public
+Resolved version: 0.8.2
 Compile CURIParser uri_parser.c
 Compile CLibvenice unix.c
 Compile CLibvenice udp.c
@@ -65,42 +92,63 @@ Compile CLibvenice timer.c
 Compile CLibvenice tcp.c
 Compile CLibvenice stack.c
 Compile CLibvenice slist.c
-Compile CLibvenice list.c
 Compile CLibvenice poller.c
+Compile CLibvenice list.c
 Compile CLibvenice ip.c
+clang: warning: argument unused during compilation: '-Xcc'
 Compile CLibvenice file.c
+clang: warning: argument unused during compilation: '-Xcc'
 Compile CLibvenice dns.c
+clang: warning: argument unused during compilation: '-Xcc'
 Compile CLibvenice debug.c
+clang: warning: argument unused during compilation: '-Xcc'
 Compile CLibvenice cr.c
+clang: warning: argument unused during compilation: '-Xcc'
 Compile CLibvenice chan.c
+clang: warning: argument unused during compilation: '-Xcc'
+clang: warning: argument unused during compilation: '-Xcc'
 Compile CHTTPParser http_parser.c
-Compile Swift Module 'String' (1 sources)
-Compile Swift Module 'C7' (22 sources)
-Compile Swift Module 'POSIX' (1 sources)
 Compile Swift Module 'Event' (2 sources)
-Compile Swift Module 'UUID' (1 sources)
+clang: warning: argument unused during compilation: '-Xcc'
+Compile Swift Module 'C7' (23 sources)
+clang: warning: argument unused during compilation: '-Xcc'
+Compile Swift Module 'POSIX' (1 sources)
+clang: warning: argument unused during compilation: '-Xcc'
+Compile Swift Module 'String' (1 sources)
+clang: warning: argument unused during compilation: '-Xcc'
 Compile Swift Module 'Environment' (1 sources)
+clang: warning: argument unused during compilation: '-Xcc'
 Linking CURIParser
+clang: warning: argument unused during compilation: '-Xcc'
+clang: warning: argument unused during compilation: '-Xcc'
+clang: warning: argument unused during compilation: '-Xcc'
 Linking CHTTPParser
+/Users/tomohisa/oss/SwiftSlackBotter/Packages/Event-0.5.1/Sources/EventEmitter.swift:40:26: warning: result of call to 'call' is unused
+            try listener.call(event)
+                         ^   ~~~~~~~
+clang: warning: argument unused during compilation: '-Xcc'
 Linking CLibvenice
-Compile Swift Module 'StructuredData' (1 sources)
-Compile Swift Module 'S4' (23 sources)
-Compile Swift Module 'Venice' (11 sources)
-Compile Swift Module 'Log' (5 sources)
 Compile Swift Module 'Base64' (1 sources)
-Compile Swift Module 'StandardOutputAppender' (1 sources)
-Compile Swift Module 'URI' (1 sources)
+Compile Swift Module 'S4' (24 sources)
+Compile Swift Module 'Venice' (11 sources)
+Compile Swift Module 'StructuredData' (1 sources)
+Compile Swift Module 'Log' (6 sources)
 Compile Swift Module 'MediaType' (1 sources)
-Compile Swift Module 'JSON' (5 sources)
+Compile Swift Module 'URI' (1 sources)
+Compile Swift Module 'WebSocket' (5 sources)
 Compile Swift Module 'IP' (1 sources)
 Compile Swift Module 'File' (2 sources)
+Compile Swift Module 'HTTPParser' (4 sources)
+Compile Swift Module 'HTTPSerializer' (4 sources)
+Compile Swift Module 'JSON' (5 sources)
 Compile Swift Module 'TCP' (3 sources)
-Compile Swift Module 'HTTPParser' (3 sources)
-Compile Swift Module 'HTTPSerializer' (3 sources)
-Compile Swift Module 'OpenSSL' (15 sources)
+/Users/tomohisa/oss/SwiftSlackBotter/Packages/File-0.8.0/Sources/File.swift:295:32: warning: result of operator '>=' is unused
+                stat(path, &s) >= 0
+                ~~~~~~~~~~~~~~ ^  ~
+Compile Swift Module 'OpenSSL' (18 sources)
 Compile Swift Module 'HTTPClient' (1 sources)
-Compile Swift Module 'HTTP' (9 sources)
+Compile Swift Module 'HTTP' (8 sources)
 Compile Swift Module 'TCPSSL' (2 sources)
-Compile Swift Module 'HTTPSClient' (1 sources)
-Compile Swift Module 'WebSocket' (6 sources)
+Compile Swift Module 'HTTPSClient' (2 sources)
+Compile Swift Module 'WebSocketClient' (1 sources)
 Compile Swift Module 'SwiftSlackBotter' (14 sources)

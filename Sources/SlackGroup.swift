@@ -36,23 +36,23 @@ public struct SlackGroup {
   public init(json:JSON) {
     self.json = json
 
-    if let members = json["members"]?.array {
+    if let members = json["members"]?.arrayValue {
       for member in members {
         if member.isString {
-          if let member = member.string {
+          if let member = member.stringValue {
             self.members.append(member)
           }
         }
       }
     }
 
-    self.creator = json["creator"]?.string
-    self.is_archived = json["is_archived"]?.bool == true
-    self.is_group = json["is_group"]?.bool == true
-    self.is_open = json["is_open"]?.bool == true
-    self.has_pins = json["has_pins"]?.bool == true
-    self.is_mpim = json["is_mpim"]?.bool == true
-    self.name = json["name"]?.string
-    self.id = json["id"]?.string
+    self.creator = json["creator"]?.stringValue
+    self.is_archived = json["is_archived"]?.booleanValue == true
+    self.is_group = json["is_group"]?.booleanValue == true
+    self.is_open = json["is_open"]?.booleanValue == true
+    self.has_pins = json["has_pins"]?.booleanValue == true
+    self.is_mpim = json["is_mpim"]?.booleanValue == true
+    self.name = json["name"]?.stringValue
+    self.id = json["id"]?.stringValue
   }
 }

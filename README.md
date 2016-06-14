@@ -2,7 +2,7 @@
 Slack Bot Framework for Swift Linux Command Line
 Created by J-Tech Creations, Inc.
 ---
-SwiftSlackBotter is Bot framework made for swift. Currently using Swift Version DEVELOPMENT-SNAPSHOT-2016-05-09-a released by Apple. Using Zewo 0.7 Frameworks and Environment 0.1 Frameworks.
+SwiftSlackBotter is Bot framework made for swift. Currently using Swift Version DEVELOPMENT-SNAPSHOT-2016-05-09-a released by Apple. Using Zewo 0.8 Frameworks and Environment 0.3 Frameworks.
 
 - [Zewo](https://github.com/Zewo/Zewo)
 - [Environment](https://github.com/czechboy0/Environment)
@@ -74,11 +74,11 @@ First we need to create a directory for our app.
 mkdir SwiftBotSample && cd SwiftBotSample
 ```
 
-Then we install Swift Development Snapshot from **May 9, 2016**.
+Then we install Swift Development Snapshot from **May 31, 2016**.
 
 ```sh
-swiftenv install DEVELOPMENT-SNAPSHOT-2016-05-09-a
-swiftenv local DEVELOPMENT-SNAPSHOT-2016-05-09-a
+swiftenv install DEVELOPMENT-SNAPSHOT-2016-05-31-a
+swiftenv local DEVELOPMENT-SNAPSHOT-2016-05-31-a
 ```
 
 Now we initialize the project with Swift Package Manager (**SPM**).
@@ -110,7 +110,7 @@ import PackageDescription
 let package = Package(
     name: "SwiftBotSample",
     dependencies: [
-      .Package(url: "https://github.com/tomohisa/SwiftSlackBotter.git", majorVersion: 0, minor: 3),
+      .Package(url: "https://github.com/tomohisa/SwiftSlackBotter.git", majorVersion: 0, minor: 6),
     ]
 )
 ```

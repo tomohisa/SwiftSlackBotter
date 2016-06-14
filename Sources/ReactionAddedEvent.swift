@@ -46,17 +46,17 @@ public struct ReactionAddedEvent : RTMEvent {
       throw RTMEventError.InvalidType
     }
 
-    guard let typeval = jsonval["type"]!.string else {
+    guard let typeval = jsonval["type"]!.stringValue else {
       throw RTMEventError.InvalidType
     }
     type = typeval
     rawData = rawdata
     jsonData = jsondata
-    self.user = jsonval["user"] == nil ? nil : jsonval["user"]!.string
-    self.reaction = jsonval["reaction"] == nil ? nil : jsonval["reaction"]!.string
-    self.ts = jsonval["ts"] == nil ? nil : jsonval["ts"]!.string
-    self.event_ts = jsonval["event_ts"] == nil ? nil : jsonval["event_ts"]!.string
-    self.item_user = jsonval["item_user"] == nil ? nil : jsonval["item_user"]!.string
+    self.user = jsonval["user"] == nil ? nil : jsonval["user"]!.stringValue
+    self.reaction = jsonval["reaction"] == nil ? nil : jsonval["reaction"]!.stringValue
+    self.ts = jsonval["ts"] == nil ? nil : jsonval["ts"]!.stringValue
+    self.event_ts = jsonval["event_ts"] == nil ? nil : jsonval["event_ts"]!.stringValue
+    self.item_user = jsonval["item_user"] == nil ? nil : jsonval["item_user"]!.stringValue
     if let messageJson = jsonval["item"] {
       self.item = MessageEvent.isJSOMMatch(jsondata: messageJson) ? try MessageEvent(rawdata: nil,jsondata: messageJson) : nil
     }
