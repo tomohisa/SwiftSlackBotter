@@ -89,6 +89,10 @@ public class Bot {
         try rtm_start()
         try socket_connect()
     }
+    public func startInBackground() throws {
+        try rtm_start()
+        try socket_connect_in_background()
+    }
 
     private func rtm_start() throws {
         do {
@@ -122,6 +126,26 @@ public class Bot {
                 }
             }
             try self.webSocketClient!.connect(uri.description)
+            logger.debug("successfully connected \(self.webSocketClient)")
+        } catch let error {
+            logger.error("\(error)")
+            throw Error.SocketConnectionError
+        }
+    }
+    private func socket_connect_in_background() throws {
+        guard let uri = self.webSocketUri else {
+            throw Error.RTMConnectionError
+        }
+        do {
+            self.webSocketClient = try WebSocketClient.Client(uri:uri) {
+                (socket: WebSocket) throws -> Void in
+                logger.debug("setting up socket:")
+                self.setupSocket(socket: socket)
+                if let onConnected = self.onConnected {
+                    onConnected(self)
+                }
+            }
+            self.webSocketClient!.connectInBackground(uri.description)
             logger.debug("successfully connected \(self.webSocketClient)")
         } catch let error {
             logger.error("\(error)")
@@ -191,6 +215,24 @@ public class Bot {
             var result =  try MessageEvent(rawdata: nil,jsondata: messageJson)
             result.channel = channel
             return result
+        } catch {
+            throw Error.ReactFails
+        }
+    }
+
+    public func getPresenceFor(username:String) throws -> Bool? {
+        do {
+            let userID = botInfo.userIdFor(username:username)
+            if userID == "" {
+                throw Error.ReactFails
+            }
+            let body = "token=\(self.botToken)&user=\(userID)"
+            var response : Response = try client.post("/api/users.getPresence", headers: headers, body: body)
+            let json : JSON = try JSONParser().parse(data: try response.body.becomeBuffer())
+            guard let ok = json["ok"]?.booleanValue else { return nil }
+            guard ok == true else { return nil }
+            if json["presence"]?.stringValue == "active" { return true }
+            return false;
         } catch {
             throw Error.ReactFails
         }

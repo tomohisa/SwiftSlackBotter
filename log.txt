@@ -1,1 +1,61 @@
+Compile CHTTPParser http_parser.c
+Compile CLibvenice unix.c
+Compile CLibvenice udp.c
+Compile CLibvenice timer.c
+Compile CLibvenice tcp.c
+Compile CLibvenice stack.c
+Compile CLibvenice slist.c
+Compile CLibvenice poller.c
+Compile CLibvenice list.c
+Compile CLibvenice ip.c
+clang: warning: argument unused during compilation: '-Xcc'
+Compile CLibvenice file.c
+clang: warning: argument unused during compilation: '-Xcc'
+Compile CLibvenice dns.c
+clang: warning: argument unused during compilation: '-Xcc'
+Compile CLibvenice debug.c
+clang: warning: argument unused during compilation: '-Xcc'
+Compile CLibvenice cr.c
+clang: warning: argument unused during compilation: '-Xcc'
+Compile CLibvenice chan.c
+clang: warning: argument unused during compilation: '-Xcc'
+clang: warning: argument unused during compilation: '-Xcc'
+Compile CURIParser uri_parser.c
+Compile Swift Module 'Environment' (1 sources)
+clang: warning: argument unused during compilation: '-Xcc'
+Compile Swift Module 'String' (1 sources)
+clang: warning: argument unused during compilation: '-Xcc'
+clang: warning: argument unused during compilation: '-Xcc'
+clang: warning: argument unused during compilation: '-Xcc'
+Compile Swift Module 'POSIX' (1 sources)
+Compile Swift Module 'C7' (23 sources)
+Compile Swift Module 'Event' (2 sources)
+clang: warning: argument unused during compilation: '-Xcc'
+Linking CHTTPParser
+clang: warning: argument unused during compilation: '-Xcc'
+clang: warning: argument unused during compilation: '-Xcc'
+clang: warning: argument unused during compilation: '-Xcc'
+Linking CURIParser
+Compile Swift Module 'Base64' (1 sources)
+Compile Swift Module 'StructuredData' (1 sources)
+Compile Swift Module 'S4' (23 sources)
+Compile Swift Module 'Log' (6 sources)
+clang: warning: argument unused during compilation: '-Xcc'
+Linking CLibvenice
+Compile Swift Module 'WebSocket' (5 sources)
+Compile Swift Module 'MediaType' (1 sources)
+Compile Swift Module 'JSON' (5 sources)
+Compile Swift Module 'URI' (1 sources)
+Compile Swift Module 'Venice' (11 sources)
+Compile Swift Module 'HTTP' (9 sources)
+Compile Swift Module 'HTTPParser' (3 sources)
+Compile Swift Module 'HTTPSerializer' (3 sources)
+Compile Swift Module 'IP' (1 sources)
+Compile Swift Module 'File' (2 sources)
+Compile Swift Module 'TCP' (3 sources)
+Compile Swift Module 'OpenSSL' (15 sources)
+Compile Swift Module 'HTTPClient' (1 sources)
+Compile Swift Module 'TCPSSL' (2 sources)
+Compile Swift Module 'HTTPSClient' (2 sources)
+Compile Swift Module 'WebSocketClient' (1 sources)
 Compile Swift Module 'SwiftSlackBotter' (14 sources)
