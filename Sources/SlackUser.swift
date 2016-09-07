@@ -33,12 +33,12 @@ public struct SlackUser {
   public let json : JSON?
   public init(json:JSON) {
     self.json = json
-    self.tz = json["tz"]?.string
-    self.tz_offset = json["tz_offset"]?.int
-    self.name = json["name"]?.string
-    self.id = json["id"]?.string
-    self.tz_label = json["ttz_labelz"]?.string
-    self.real_name = json["real_name"]?.string
-    self.team_id = json["team_id"]?.string
+    self.tz = json["tz"]?.stringValue
+    self.tz_offset = json["tz_offset"]?.intValue
+    self.name = json["name"]?.stringValue
+    self.id = json["id"]?.stringValue
+    self.tz_label = json["ttz_labelz"]?.stringValue
+    self.real_name = json["real_name"]?.stringValue
+    self.team_id = json["team_id"]?.stringValue
   }
 }

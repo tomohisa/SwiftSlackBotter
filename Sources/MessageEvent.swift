@@ -41,7 +41,7 @@ public struct MessageEvent : RTMEvent {
   public var reactions : [Reactions] = []
   public var subtype : String? {
     get {
-      return jsonData?["subtype"]?.string
+      return jsonData?["subtype"]?.stringValue
     }
   }
   public var isBotMessage : Bool {
@@ -66,24 +66,24 @@ public struct MessageEvent : RTMEvent {
       throw RTMEventError.InvalidType
     }
 
-    guard let typeval = jsonval["type"]!.string else {
+    guard let typeval = jsonval["type"]!.stringValue else {
       throw RTMEventError.InvalidType
     }
     type = typeval
     rawData = rawdata
     jsonData = jsondata
-    self.channel = jsonval["channel"] == nil ? nil : jsonval["channel"]!.string
-    self.user = jsonval["user"] == nil ? nil : jsonval["user"]!.string
-    self.text = jsonval["text"] == nil ? nil : jsonval["text"]!.string
-    self.ts = jsonval["ts"] == nil ? nil : jsonval["ts"]!.string
-    if let reactions = jsonval["reactions"]?.array {
+    self.channel = jsonval["channel"] == nil ? nil : jsonval["channel"]!.stringValue
+    self.user = jsonval["user"] == nil ? nil : jsonval["user"]!.stringValue
+    self.text = jsonval["text"] == nil ? nil : jsonval["text"]!.stringValue
+    self.ts = jsonval["ts"] == nil ? nil : jsonval["ts"]!.stringValue
+    if let reactions = jsonval["reactions"]?.arrayValue {
         for reaction in reactions {
             var r = Reactions()
-            if let count = reaction["count"]?.int { r.count = count }
-            if let name = reaction["name"]?.string { r.name = name }
-            if let users = reaction["users"]?.array {
+            if let count = reaction["count"]?.intValue { r.count = count }
+            if let name = reaction["name"]?.stringValue { r.name = name }
+            if let users = reaction["users"]?.arrayValue {
                 for user in users {
-                    if let userid = user.string { r.users.append(userid) }
+                    if let userid = user.stringValue { r.users.append(userid) }
                 }
             }
             self.reactions.append(r)
