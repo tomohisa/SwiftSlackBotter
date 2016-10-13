@@ -20,9 +20,9 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-import JSON
+import Axis
 
-public struct SlackChannel {
+public struct SlackChannel : MapConvertible {
   let is_channel : Bool
   let id : String?
   let creator : String?
@@ -32,17 +32,4 @@ public struct SlackChannel {
   let is_member : Bool
   let has_pins : Bool
   let name : String?
-  let json : JSON?
-  public init(json:JSON) {
-    self.json = json
-    self.is_channel = json["is_channel"]?.booleanValue == true
-    self.id = json["id"]?.stringValue
-    self.creator = json["creator"]?.stringValue
-    self.is_archived = json["is_archived"]?.booleanValue == true
-    self.is_general = json["is_general"]?.booleanValue == true
-    self.created = json["created"]?.intValue
-    self.is_member = json["is_member"]?.booleanValue == true
-    self.has_pins = json["has_pins"]?.booleanValue == true
-    self.name = json["name"]?.stringValue
-  }
 }

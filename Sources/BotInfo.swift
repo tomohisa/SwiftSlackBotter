@@ -20,50 +20,26 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-import JSON
+import Axis
 
-public struct BotInfo {
+public struct BotInfo : MapConvertible {
     public enum ChannelType {
         case Channel
         case PrivateChannel
         case DirectMessage
     }
-    public let json : JSON?
     public var users = [SlackUser]()
     public var channels = [SlackChannel]()
     public var privateChannels = [SlackGroup]()
     public var directMessages = [SlackDirectMessage]()
     
-    public init(json:JSON? = nil) {
-        self.json = json
-        guard let json = json else {
-            return
-        }
-        logger.debug(json)
-        if let users = json["users"]?.arrayValue {
-            for user in users {
-                self.users.append(SlackUser(json:user))
-            }
-        }
-        if let channels = json["channels"]?.arrayValue {
-            for channel in channels {
-                self.channels.append(SlackChannel(json:channel))
-            }
-        }
-        if let privateChannels = json["groups"]?.arrayValue {
-            for privateChannel in privateChannels {
-                self.privateChannels.append(SlackGroup(json:privateChannel))
-            }
-        }
-        if let directMessages = json["ims"]?.arrayValue {
-            for im in directMessages {
-                self.directMessages.append(SlackDirectMessage(json:im))
-            }
-        }
-    }
     public var botId : String? {
         get {
-            return self.json?["self"]?["id"]?.stringValue
+            do {
+                return try self.asMap().dictionary?["self"]?.dictionary?["id"]?.string
+            } catch {
+                return nil;
+            }
         }
     }
     public func channelType(id:String?) -> ChannelType? {

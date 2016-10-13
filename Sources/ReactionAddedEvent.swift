@@ -20,49 +20,18 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-import JSON
-import Log
+import Axis
 
-public struct ReactionAddedEvent : RTMEvent {
+public struct ReactionAddedEvent : RTMEvent, MapConvertible {
   public var type : String
-  public var rawData : Data?
-  public var jsonData : JSON?
   public var user : String?
   public var reaction : String?
   public var ts : String?
   public var event_ts : String?
   public var item_user : String?
   public var item : RTMEvent? = nil
-  public init(rawdata:Data? = nil, jsondata: JSON?) throws {
-    var jsonval1 = jsondata
-
-    if jsondata == nil && rawdata != nil {
-      guard let rawdata = rawdata else {
-        throw RTMEventError.InvalidType
-      }
-      jsonval1 = try JSONParser().parse(data: rawdata)
-    }
-    guard let jsonval = jsonval1 else {
-      throw RTMEventError.InvalidType
-    }
-
-    guard let typeval = jsonval["type"]!.stringValue else {
-      throw RTMEventError.InvalidType
-    }
-    type = typeval
-    rawData = rawdata
-    jsonData = jsondata
-    self.user = jsonval["user"] == nil ? nil : jsonval["user"]!.stringValue
-    self.reaction = jsonval["reaction"] == nil ? nil : jsonval["reaction"]!.stringValue
-    self.ts = jsonval["ts"] == nil ? nil : jsonval["ts"]!.stringValue
-    self.event_ts = jsonval["event_ts"] == nil ? nil : jsonval["event_ts"]!.stringValue
-    self.item_user = jsonval["item_user"] == nil ? nil : jsonval["item_user"]!.stringValue
-    if let messageJson = jsonval["item"] {
-      self.item = MessageEvent.isJSOMMatch(jsondata: messageJson) ? try MessageEvent(rawdata: nil,jsondata: messageJson) : nil
-    }
-  }
-  public static func isJSOMMatch(jsondata: JSON) -> Bool {
-    guard let type = jsondata["type"] else {
+  public static func isJSOMMatch(map: Map) -> Bool {
+    guard let type = map.dictionary?["type"] else {
       return false
     }
     if type == "reaction_added" {

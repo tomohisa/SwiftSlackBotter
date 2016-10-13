@@ -20,9 +20,9 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-import JSON
+import Axis
 
 public protocol EventMatcher {
-  func matchWithRawData(rawdata: Data) throws -> RTMEvent?
-  func matchWithJSONData(jsondata: JSON) throws -> RTMEvent?
+  func match(rawdata: Buffer) throws -> RTMEvent?
+  func match(map: Map) throws -> RTMEvent?
 }

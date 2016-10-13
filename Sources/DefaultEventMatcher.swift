@@ -20,29 +20,27 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-import JSON
-import Log
+import Axis
 
 public class DefaultEventMatcher : EventMatcher {
-  public enum Error : ErrorProtocol {
+  public enum EventError : Error {
     case EventUnmatch
     case InvalidJson
   }
-  public func matchWithRawData(rawdata: Data) throws -> RTMEvent? {
-    let eventJson: JSON = try JSONParser().parse(data: rawdata)
-    return try self.matchWithJSONData(jsondata: eventJson)
+  public func match(rawdata: Buffer) throws -> RTMEvent? {
+    return try self.match(map: try JSONMapParser.parse(rawdata))
   }
-  public func matchWithJSONData(jsondata: JSON) throws -> RTMEvent? {
-    if HelloEvent.isJSOMMatch(jsondata: jsondata) {
-      return try HelloEvent(rawdata: nil,jsondata: jsondata)
+  public func match(map: Map) throws -> RTMEvent? {
+    if HelloEvent.isJSOMMatch(map: map) {
+        return try HelloEvent(map: map)
     }
-    if MessageEvent.isJSOMMatch(jsondata: jsondata) {
-      return try MessageEvent(rawdata: nil,jsondata: jsondata)
+    if MessageEvent.isJSOMMatch(map: map) {
+      return try MessageEvent(map: map)
     }
-    if ReactionAddedEvent.isJSOMMatch(jsondata: jsondata) {
-      return try ReactionAddedEvent(rawdata: nil,jsondata: jsondata)
+    if ReactionAddedEvent.isJSOMMatch(map: map) {
+      return try ReactionAddedEvent(map: map)
     }
-    logger.debug(jsondata)
+    logger.debug(map)
     return nil
   }
 }
