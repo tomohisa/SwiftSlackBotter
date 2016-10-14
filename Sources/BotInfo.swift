@@ -22,7 +22,7 @@
 // SOFTWARE.
 import Axis
 
-public struct BotInfo : MapConvertible {
+public struct BotInfo {
     public enum ChannelType {
         case Channel
         case PrivateChannel
@@ -30,16 +30,46 @@ public struct BotInfo : MapConvertible {
     }
     public var users = [SlackUser]()
     public var channels = [SlackChannel]()
-    public var privateChannels = [SlackGroup]()
-    public var directMessages = [SlackDirectMessage]()
+    public var groups = [SlackGroup]()
+    public var ims = [SlackDirectMessage]()
+    public var map: Map?
+    
+    public init(map:Map? = nil) {
+        self.map = map
+        guard let map = map else {
+            return
+        }
+        logger.debug(map)
+        do {
+            if let users = map.dictionary?["users"]?.array {
+                for user in users {
+                    self.users.append(try SlackUser(map:user))
+                }
+            }
+            if let channels = map.dictionary?["channels"]?.array {
+                for channel in channels {
+                    self.channels.append(try SlackChannel(map:channel))
+                }
+            }
+            if let privateChannels = map.dictionary?["groups"]?.array {
+                for privateChannel in privateChannels {
+                    self.groups.append(try SlackGroup(map:privateChannel))
+                }
+            }
+            if let directMessages = map.dictionary?["ims"]?.array {
+                for im in directMessages {
+                    self.ims.append(try SlackDirectMessage(map:im))
+                }
+            }
+        } catch let error {
+            logger.debug(error);
+        }
+    }
     
     public var botId : String? {
         get {
-            do {
-                return try self.asMap().dictionary?["self"]?.dictionary?["id"]?.string
-            } catch {
-                return nil;
-            }
+                guard let map = self.map else { return nil }
+                return map.dictionary?["self"]?.dictionary?["id"]?.string
         }
     }
     public func channelType(id:String?) -> ChannelType? {
@@ -51,12 +81,12 @@ public struct BotInfo : MapConvertible {
                 return .Channel
             }
         }
-        for channel in privateChannels {
+        for channel in groups {
             if channel.id == id && channel.is_group {
                 return .PrivateChannel
             }
         }
-        for channel in directMessages {
+        for channel in ims {
             if channel.id == id && channel.is_im {
                 return .DirectMessage
             }
@@ -70,7 +100,7 @@ public struct BotInfo : MapConvertible {
                 return channel.id
             }
         }
-        for channel in privateChannels {
+        for channel in groups {
             if channel.name == name && channel.is_group {
                 return channel.id
             }
@@ -138,7 +168,7 @@ public struct BotInfo : MapConvertible {
         guard let id = id else {
             return ""
         }
-        for directMessage in directMessages {
+        for directMessage in ims {
             if directMessage.user == id {
                 guard let directMessageId = directMessage.id else { return "" }
                 return directMessageId
@@ -150,7 +180,7 @@ public struct BotInfo : MapConvertible {
         guard let id = channelID else {
             return ""
         }
-        for directMessage in directMessages {
+        for directMessage in ims {
             if directMessage.id == id {
                 guard let userID = directMessage.user else { return "" }
                 return self.usernameFor(id: userID)

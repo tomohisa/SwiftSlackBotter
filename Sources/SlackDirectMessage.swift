@@ -23,13 +23,13 @@
 import Axis
 
 public struct SlackDirectMessage : MapConvertible {
-  let is_org_shared : Bool
-  let id : String?
-  let is_im : Bool
-  let created : String?
-  let user : String?
-  let unread_count : Int?
-  let has_pins : Bool
-  let unread_count_display : Int?
-  let is_open : Bool
+  let is_org_shared : Bool = false
+  let id : String? = nil
+  let is_im : Bool = false
+//  let created : String? = nil
+  let user : String? = nil
+  let unread_count : Int? = nil
+  let has_pins : Bool = false
+  let unread_count_display : Int?  = nil
+//  let is_open : Bool? = false
 }

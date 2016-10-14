@@ -32,13 +32,13 @@ public class DefaultEventMatcher : EventMatcher {
   }
   public func match(map: Map) throws -> RTMEvent? {
     if HelloEvent.isJSOMMatch(map: map) {
-        return try HelloEvent(map: map)
+        return HelloEvent(map: map)
     }
     if MessageEvent.isJSOMMatch(map: map) {
-      return try MessageEvent(map: map)
+      return MessageEvent(map: map)
     }
     if ReactionAddedEvent.isJSOMMatch(map: map) {
-      return try ReactionAddedEvent(map: map)
+      return ReactionAddedEvent(map: map)
     }
     logger.debug(map)
     return nil

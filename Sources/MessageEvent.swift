@@ -22,43 +22,69 @@
 // SOFTWARE.
 import Axis
 
-public struct Reactions : MapConvertible {
+public struct Reactions {
     public var count : Int = 0
     public var name : String = ""
     public var users : [String] = []
+    public var map : Map? = nil
+    public init(map: Map){
+        self.map = map
+        if let count = map.dictionary?["count"]?.int { self.count = count }
+        if let name = map.dictionary?["name"]?.string { self.name = name }
+        if let users = map.dictionary?["users"]?.array {
+            for userMap in users {
+                if let user = userMap.string { self.users.append(user) }
+            }
+        }
+    }
 }
 
 
-public struct MessageEvent : RTMEvent, MapConvertible {
-  public var type : String
-  public var channel : String?
-  public var user : String?
-  public var text : String?
-  public var ts : String?
-  public var reactions : [Reactions] = []
-  public var subtype : String? {
-    get {
-        do {
-            return try self.asMap().dictionary?["subtype"]?.string
-        } catch { return nil}
+public struct MessageEvent : RTMEvent {
+    public var type : String = ""
+    public var channel : String? = nil
+    public var user : String? = nil
+    public var text : String? = nil
+    public var ts : String? = nil
+    public var reactions : [Reactions] = []
+    public var map : Map? = nil
+    
+    public init(map: Map) {
+        self.map = map
+        if let type = map.dictionary?["type"]?.string { self.type = type }
+        if let channel = map.dictionary?["channel"]?.string { self.channel = channel }
+        if let user = map.dictionary?["user"]?.string { self.user = user }
+        if let text = map.dictionary?["text"]?.string { self.text = text }
+        if let ts = map.dictionary?["ts"]?.string { self.ts = ts }
+        if let reactions = map.dictionary?["reactions"]?.array {
+            for reaction in reactions {
+                self.reactions.append(Reactions(map: reaction))
+            }
+        }
     }
-  }
-  public var isBotMessage : Bool {
-    get {
-      guard let subtype = self.subtype else {
-        return false
-      }
-      logger.debug(subtype)
-      return subtype == "bot_message"
+    
+    public var subtype : String? {
+        get {
+            guard let subtype = self.map?.dictionary?["subtype"]?.string else { return nil }
+            return subtype
+        }
     }
-  }
-  public static func isJSOMMatch(map: Map) -> Bool {
-    guard let type = map.dictionary?["type"] else {
-      return false
+    public var isBotMessage : Bool {
+        get {
+            guard let subtype = self.subtype else {
+                return false
+            }
+            logger.debug(subtype)
+            return subtype == "bot_message"
+        }
     }
-    if type == "message" {
-      return true;
+    public static func isJSOMMatch(map: Map) -> Bool {
+        guard let type = map.dictionary?["type"] else {
+            return false
+        }
+        if type == "message" {
+            return true;
+        }
+        return false;
     }
-    return false;
-  }
 }

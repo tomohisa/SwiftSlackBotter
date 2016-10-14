@@ -23,37 +23,20 @@
 import Axis
 
 
-public struct HelloEvent : RTMEvent, MapConvertible {
-  public var type : String
-  public var rawData : Buffer?
-  public var jsonData : Map?
-  public init(rawdata:Buffer? = nil, jsondata: Map?) throws {
-    var jsonval1 = jsondata
-
-    if jsondata == nil && rawdata != nil {
-      guard let rawdata = rawdata else {
-        throw RTMEventError.InvalidType
-      }
-      jsonval1 = try JSONMapParser.parse(rawdata)
+public struct HelloEvent : RTMEvent {
+    public var type : String = ""
+    public static func isJSOMMatch(map: Map) -> Bool {
+        guard let type = map.dictionary?["type"]?.string else {
+            return false
+        }
+        if type == "hello" {
+            return true;
+        }
+        return false;
     }
-    guard let jsonval = jsonval1 else {
-      throw RTMEventError.InvalidType
+    public init(map: Map){
+        if let type = map.dictionary?["type"]?.string {
+            self.type = type
+        }
     }
-
-    guard let typeval = jsonval.dictionary?["type"]?.string else {
-      throw RTMEventError.InvalidType
-    }
-    type = typeval
-    rawData = rawdata
-    jsonData = jsondata
-  }
-  public static func isJSOMMatch(map: Map) -> Bool {
-    guard let type = map.dictionary?["type"]?.string else {
-      return false
-    }
-    if type == "hello" {
-      return true;
-    }
-    return false;
-  }
 }

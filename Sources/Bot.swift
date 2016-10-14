@@ -102,7 +102,7 @@ public class Bot {
                 throw BotError.RTMConnectionError
             }
             self.webSocketUrl = URL(string: url)
-            self.botInfo = try BotInfo(map: map)
+            self.botInfo = BotInfo(map: map)
             self.isBotActive = true
         } catch {
             throw BotError.RTMConnectionError
@@ -165,6 +165,7 @@ public class Bot {
         guard let event = try self.eventMatcher.match(map: try JSONMapParser.parse(message)) else {
             return
         }
+        logger.debug(event.type)
         for observer in observers {
             try observer.onEvent(event: event, bot:self)
         }
@@ -193,6 +194,7 @@ public class Bot {
                 throw BotError.ReactFails
             }
             let body = "token=\(self.botToken)&name=\(name)&channel=\(channel)&timestamp=\(timestamp)"
+            logger.debug(body)
             let _ = try client.post("/api/reactions.add", headers: headers, body: body)
         } catch {
             throw BotError.ReactFails
@@ -211,7 +213,7 @@ public class Bot {
             if map.dictionary?["type"]?.string != "message" { return nil }
             guard let messageMap = map.dictionary?["message"] else { return nil }
             guard MessageEvent.isJSOMMatch(map: messageMap) else { return nil }
-            var result =  try MessageEvent(map: messageMap)
+            var result = MessageEvent(map: messageMap)
             result.channel = channel
             return result
         } catch {

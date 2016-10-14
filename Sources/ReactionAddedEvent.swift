@@ -22,21 +22,37 @@
 // SOFTWARE.
 import Axis
 
-public struct ReactionAddedEvent : RTMEvent, MapConvertible {
-  public var type : String
-  public var user : String?
-  public var reaction : String?
-  public var ts : String?
-  public var event_ts : String?
-  public var item_user : String?
-  public var item : RTMEvent? = nil
-  public static func isJSOMMatch(map: Map) -> Bool {
-    guard let type = map.dictionary?["type"] else {
-      return false
+public struct ReactionAddedEvent : RTMEvent {
+    public var type : String = ""
+    public var user : String?  = nil
+    public var reaction : String? = nil
+    public var ts : String? = nil
+    public var event_ts : String? = nil
+    public var item_user : String? = nil
+    public var item : RTMEvent? = nil
+    
+    public var map : Map? = nil
+    
+    public init(map: Map) {
+        self.map = map
+        if let type = map.dictionary?["type"]?.string { self.type = type }
+        if let user = map.dictionary?["user"]?.string { self.user = user }
+        if let reaction = map.dictionary?["reaction"]?.string { self.reaction = reaction }
+        if let ts = map.dictionary?["ts"]?.string { self.ts = ts }
+        if let event_ts = map.dictionary?["event_ts"]?.string { self.event_ts = event_ts }
+        if let item_user = map.dictionary?["item_user"]?.string { self.item_user = item_user }
+        if let itemMap = map.dictionary?["item"] {
+            self.item = MessageEvent(map: itemMap)
+        }
     }
-    if type == "reaction_added" {
-      return true;
+    
+    public static func isJSOMMatch(map: Map) -> Bool {
+        guard let type = map.dictionary?["type"] else {
+            return false
+        }
+        if type == "reaction_added" {
+            return true;
+        }
+        return false;
     }
-    return false;
-  }
 }

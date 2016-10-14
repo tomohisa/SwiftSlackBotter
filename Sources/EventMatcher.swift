@@ -23,6 +23,5 @@
 import Axis
 
 public protocol EventMatcher {
-  func match(rawdata: Buffer) throws -> RTMEvent?
   func match(map: Map) throws -> RTMEvent?
 }

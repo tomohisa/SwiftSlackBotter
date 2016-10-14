@@ -23,11 +23,11 @@
 import Axis
 
 public struct SlackUser : MapConvertible {
-  public let tz : String?
-  public let tz_offset : Int?
-  public let name : String?
-  public let tz_label : String?
-  public let id : String?
-  public let real_name : String?
-  public let team_id : String?
+  public let tz : String? = nil
+  public let tz_offset : Int? = nil
+  public let name : String? = nil
+  public let tz_label : String? = nil
+  public let id : String? = nil
+  public let real_name : String? = nil
+  public let team_id : String? = nil
 }
