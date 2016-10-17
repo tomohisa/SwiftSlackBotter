@@ -19,7 +19,7 @@ public class Bot {
     }
     let botToken : String
     var webSocketUrl : URL? = nil
-    let client : HTTPClient.Client
+    var client : HTTPClient.Client
     var webSocketClient : WebSocketClient? = nil
     let eventMatcher : EventMatcher
     public var botInfo : BotInfo = BotInfo()
@@ -95,13 +95,15 @@ public class Bot {
     private func rtm_start() throws {
         do {
             var response :Response
+            guard let url = URL(string: "https://slack.com") else { throw BotError.InitializeError }
+            self.client = try Client(url: url)
             response = try client.get("/api/rtm.start?token=" + self.botToken)
             let buffer = try response.body.becomeBuffer(deadline: 3.second.fromNow())
             let map = try JSONMapParser.parse(buffer)
-            guard let url = map.dictionary?["url"]?.string else {
+            guard let urlws = map.dictionary?["url"]?.string else {
                 throw BotError.RTMConnectionError
             }
-            self.webSocketUrl = URL(string: url)
+            self.webSocketUrl = URL(string: urlws)
             self.botInfo = BotInfo(map: map)
             self.isBotActive = true
         } catch {
@@ -181,6 +183,8 @@ public class Bot {
     public func postMessage(channelID: String, text:String, asUser:Bool = true, botName:String?=nil) throws {
         do {
             let body = "token=\(self.botToken)&channel=\(channelID)&text=\(text)&as_user=\(asUser)" + (botName == nil ? "" : "&username=\(botName)")
+            guard let url = URL(string: "https://slack.com") else { throw BotError.InitializeError }
+            self.client = try Client(url: url)
             let _ = try client.post("/api/chat.postMessage", headers: headers, body: body)
         } catch { throw BotError.PostFailedError }
     }
@@ -195,6 +199,8 @@ public class Bot {
             }
             let body = "token=\(self.botToken)&name=\(name)&channel=\(channel)&timestamp=\(timestamp)"
             logger.debug(body)
+            guard let url = URL(string: "https://slack.com") else { throw BotError.InitializeError }
+            self.client = try Client(url: url)
             let _ = try client.post("/api/reactions.add", headers: headers, body: body)
         } catch {
             throw BotError.ReactFails
@@ -206,6 +212,8 @@ public class Bot {
                 throw BotError.ReactFails
             }
             let body = "token=\(self.botToken)&channel=\(channel)&timestamp=\(timestamp)"
+            guard let url = URL(string: "https://slack.com") else { throw BotError.InitializeError }
+            self.client = try Client(url: url)
             var response : Response = try client.post("/api/reactions.get", headers: headers, body: body)
             let map : Map = try JSONMapParser.parse(response.body.becomeBuffer(deadline: 3.seconds.fromNow()))
             guard let ok = map.dictionary?["ok"]?.bool else { return nil }
@@ -228,6 +236,8 @@ public class Bot {
                 throw BotError.ReactFails
             }
             let body = "token=\(self.botToken)&user=\(userID)"
+            guard let url = URL(string: "https://slack.com") else { throw BotError.InitializeError }
+            self.client = try Client(url: url)
             var response : Response = try client.post("/api/users.getPresence", headers: headers, body: body)
             let map : Map = try JSONMapParser.parse(response.body.becomeBuffer(deadline: 3.seconds.fromNow()))
             guard let ok = map.dictionary?["ok"]?.bool else { return nil }
