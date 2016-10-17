@@ -20,40 +20,23 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-import JSON
+import Axis
 
 
 public struct HelloEvent : RTMEvent {
-  public var type : String
-  public var rawData : Data?
-  public var jsonData : JSON?
-  public init(rawdata:Data? = nil, jsondata: JSON?) throws {
-    var jsonval1 = jsondata
-
-    if jsondata == nil && rawdata != nil {
-      guard let rawdata = rawdata else {
-        throw RTMEventError.InvalidType
-      }
-      jsonval1 = try JSONParser().parse(data: rawdata)
+    public var type : String = ""
+    public static func isJSOMMatch(map: Map) -> Bool {
+        guard let type = map.dictionary?["type"]?.string else {
+            return false
+        }
+        if type == "hello" {
+            return true;
+        }
+        return false;
     }
-    guard let jsonval = jsonval1 else {
-      throw RTMEventError.InvalidType
+    public init(map: Map){
+        if let type = map.dictionary?["type"]?.string {
+            self.type = type
+        }
     }
-
-    guard let typeval = jsonval["type"]!.stringValue else {
-      throw RTMEventError.InvalidType
-    }
-    type = typeval
-    rawData = rawdata
-    jsonData = jsondata
-  }
-  public static func isJSOMMatch(jsondata: JSON) -> Bool {
-    guard let type = jsondata["type"] else {
-      return false
-    }
-    if type == "hello" {
-      return true;
-    }
-    return false;
-  }
 }

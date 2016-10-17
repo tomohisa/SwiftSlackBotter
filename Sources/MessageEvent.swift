@@ -20,83 +20,71 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-import JSON
-import Log
+import Axis
 
 public struct Reactions {
     public var count : Int = 0
     public var name : String = ""
     public var users : [String] = []
+    public var map : Map? = nil
+    public init(map: Map){
+        self.map = map
+        if let count = map.dictionary?["count"]?.int { self.count = count }
+        if let name = map.dictionary?["name"]?.string { self.name = name }
+        if let users = map.dictionary?["users"]?.array {
+            for userMap in users {
+                if let user = userMap.string { self.users.append(user) }
+            }
+        }
+    }
 }
 
 
 public struct MessageEvent : RTMEvent {
-  public var type : String
-  public var rawData : Data?
-  public var jsonData : JSON?
-  public var channel : String?
-  public var user : String?
-  public var text : String?
-  public var ts : String?
-  public var reactions : [Reactions] = []
-  public var subtype : String? {
-    get {
-      return jsonData?["subtype"]?.stringValue
-    }
-  }
-  public var isBotMessage : Bool {
-    get {
-      guard let subtype = self.subtype else {
-        return false
-      }
-      logger.debug(subtype)
-      return subtype == "bot_message"
-    }
-  }
-  public init(rawdata:Data? = nil, jsondata: JSON?) throws {
-    var jsonval1 = jsondata
-
-    if jsondata == nil && rawdata != nil {
-      guard let rawdata = rawdata else {
-        throw RTMEventError.InvalidType
-      }
-      jsonval1 = try JSONParser().parse(data: rawdata)
-    }
-    guard let jsonval = jsonval1 else {
-      throw RTMEventError.InvalidType
-    }
-
-    guard let typeval = jsonval["type"]!.stringValue else {
-      throw RTMEventError.InvalidType
-    }
-    type = typeval
-    rawData = rawdata
-    jsonData = jsondata
-    self.channel = jsonval["channel"] == nil ? nil : jsonval["channel"]!.stringValue
-    self.user = jsonval["user"] == nil ? nil : jsonval["user"]!.stringValue
-    self.text = jsonval["text"] == nil ? nil : jsonval["text"]!.stringValue
-    self.ts = jsonval["ts"] == nil ? nil : jsonval["ts"]!.stringValue
-    if let reactions = jsonval["reactions"]?.arrayValue {
-        for reaction in reactions {
-            var r = Reactions()
-            if let count = reaction["count"]?.intValue { r.count = count }
-            if let name = reaction["name"]?.stringValue { r.name = name }
-            if let users = reaction["users"]?.arrayValue {
-                for user in users {
-                    if let userid = user.stringValue { r.users.append(userid) }
-                }
+    public var type : String = ""
+    public var channel : String? = nil
+    public var user : String? = nil
+    public var text : String? = nil
+    public var ts : String? = nil
+    public var reactions : [Reactions] = []
+    public var map : Map? = nil
+    
+    public init(map: Map) {
+        self.map = map
+        if let type = map.dictionary?["type"]?.string { self.type = type }
+        if let channel = map.dictionary?["channel"]?.string { self.channel = channel }
+        if let user = map.dictionary?["user"]?.string { self.user = user }
+        if let text = map.dictionary?["text"]?.string { self.text = text }
+        if let ts = map.dictionary?["ts"]?.string { self.ts = ts }
+        if let reactions = map.dictionary?["reactions"]?.array {
+            for reaction in reactions {
+                self.reactions.append(Reactions(map: reaction))
             }
-            self.reactions.append(r)
         }
     }
-  }
-  public static func isJSOMMatch(jsondata: JSON) -> Bool {
-    guard let type = jsondata["type"] else {
-      return false
+    
+    public var subtype : String? {
+        get {
+            guard let subtype = self.map?.dictionary?["subtype"]?.string else { return nil }
+            return subtype
+        }
     }
-    if type == "message" {
-      return true;
+    public var isBotMessage : Bool {
+        get {
+            guard let subtype = self.subtype else {
+                return false
+            }
+            logger.debug(subtype)
+            return subtype == "bot_message"
+        }
     }
-    return false;
-  }
+    public static func isJSOMMatch(map: Map) -> Bool {
+        guard let type = map.dictionary?["type"] else {
+            return false
+        }
+        if type == "message" {
+            return true;
+        }
+        return false;
+    }
 }

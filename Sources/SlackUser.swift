@@ -20,25 +20,14 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-import JSON
+import Axis
 
-public struct SlackUser {
-  public let tz : String?
-  public let tz_offset : Int?
-  public let name : String?
-  public let tz_label : String?
-  public let id : String?
-  public let real_name : String?
-  public let team_id : String?
-  public let json : JSON?
-  public init(json:JSON) {
-    self.json = json
-    self.tz = json["tz"]?.stringValue
-    self.tz_offset = json["tz_offset"]?.intValue
-    self.name = json["name"]?.stringValue
-    self.id = json["id"]?.stringValue
-    self.tz_label = json["ttz_labelz"]?.stringValue
-    self.real_name = json["real_name"]?.stringValue
-    self.team_id = json["team_id"]?.stringValue
-  }
+public struct SlackUser : MapConvertible {
+  public let tz : String? = nil
+  public let tz_offset : Int? = nil
+  public let name : String? = nil
+  public let tz_label : String? = nil
+  public let id : String? = nil
+  public let real_name : String? = nil
+  public let team_id : String? = nil
 }
