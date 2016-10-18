@@ -116,7 +116,7 @@ public class Bot {
             throw BotError.RTMConnectionError
         }
         do {
-            self.webSocketClient = try WebSocketClient(url: uri) {
+            self.webSocketClient = try WebSocketClient(url: uri, connectionTimeout: 1.hour) {
                 (socket: WebSocket) throws -> Void in
                 logger.debug("setting up socket:")
                 self.setupSocket(socket: socket)
