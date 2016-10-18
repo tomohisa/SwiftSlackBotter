@@ -1,4 +1,67 @@
-Compile CHTTPParser http_parser.c
+Cloning https://github.com/Zewo/WebSocketClient.git
+HEAD is now at a385aec Merge pull request #3 from Zewo/connection_timerout
+Resolved version: 0.14.1
+Cloning https://github.com/Zewo/WebSocket.git
+HEAD is now at 3d6ff18 Timeout should be parameter (#21)
+Resolved version: 0.14.2
+Cloning https://github.com/Zewo/Axis.git
+HEAD is now at 40464b0 update Axis Linux tests
+Resolved version: 0.14.0
+Cloning https://github.com/Zewo/POSIX.git
+HEAD is now at 53c0569 POSIX: add Regex, update Regex to swift 3, API changes (#168)
+Resolved version: 0.14.1
+Cloning https://github.com/Zewo/CPOSIX.git
+HEAD is now at 04ff717 Create README.md
+Resolved version: 0.14.0
+Cloning https://github.com/Zewo/Reflection.git
+HEAD is now at 2bc1a76 make mappable tests public on reflection
+Resolved version: 0.14.0
+Cloning https://github.com/Zewo/CYAJL.git
+HEAD is now at 1e5e150 make it pure C
+Resolved version: 0.14.0
+Cloning https://github.com/Zewo/HTTPClient.git
+HEAD is now at 6b5fc55 update readme badges
+Resolved version: 0.14.0
+Cloning https://github.com/Zewo/Venice.git
+HEAD is now at fedb07e update readme badges
+Resolved version: 0.14.0
+Cloning https://github.com/Zewo/CLibvenice.git
+HEAD is now at 10a3489 Update README.md
+Resolved version: 0.14.0
+Cloning https://github.com/Zewo/HTTPFile.git
+HEAD is now at e0713a1 add HTTPFile tests
+Resolved version: 0.14.0
+Cloning https://github.com/Zewo/HTTP.git
+HEAD is now at 286e22a disable crashing test on linux
+Resolved version: 0.14.0
+Cloning https://github.com/Zewo/CHTTPParser.git
+HEAD is now at 88306ab Update README.md
+Resolved version: 0.14.0
+Cloning https://github.com/Zewo/File.git
+HEAD is now at f604b06 update readme badges
+Resolved version: 0.14.0
+Cloning https://github.com/Zewo/TCP.git
+HEAD is now at de7d18f express test only dep tcp
+Resolved version: 0.14.0
+Cloning https://github.com/Zewo/IP.git
+HEAD is now at fbf0b42 update readme badges
+Resolved version: 0.14.0
+Cloning https://github.com/Zewo/OpenSSL.git
+HEAD is now at cb24491 update readme badges
+Resolved version: 0.14.0
+Cloning https://github.com/Zewo/COpenSSL.git
+HEAD is now at a8a1ae7 Update README.md
+Resolved version: 0.14.0
+Compile CPOSIX posix.c
+Compile CYAJL yajl_version.c
+Compile CYAJL yajl_tree.c
+Compile CYAJL yajl_parser.c
+Compile CYAJL yajl_lex.c
+Compile CYAJL yajl_gen.c
+Compile CYAJL yajl_encode.c
+Compile CYAJL yajl_buf.c
+Compile CYAJL yajl_alloc.c
+Compile CYAJL yajl.c
 Compile CLibvenice unix.c
 Compile CLibvenice udp.c
 Compile CLibvenice timer.c
@@ -8,54 +71,710 @@ Compile CLibvenice slist.c
 Compile CLibvenice poller.c
 Compile CLibvenice list.c
 Compile CLibvenice ip.c
-clang: warning: argument unused during compilation: '-Xcc'
 Compile CLibvenice file.c
-clang: warning: argument unused during compilation: '-Xcc'
 Compile CLibvenice dns.c
-clang: warning: argument unused during compilation: '-Xcc'
 Compile CLibvenice debug.c
-clang: warning: argument unused during compilation: '-Xcc'
 Compile CLibvenice cr.c
-clang: warning: argument unused during compilation: '-Xcc'
 Compile CLibvenice chan.c
-clang: warning: argument unused during compilation: '-Xcc'
-clang: warning: argument unused during compilation: '-Xcc'
-Compile CURIParser uri_parser.c
-Compile Swift Module 'Environment' (1 sources)
-clang: warning: argument unused during compilation: '-Xcc'
-Compile Swift Module 'String' (1 sources)
-clang: warning: argument unused during compilation: '-Xcc'
-clang: warning: argument unused during compilation: '-Xcc'
-clang: warning: argument unused during compilation: '-Xcc'
-Compile Swift Module 'POSIX' (1 sources)
-Compile Swift Module 'C7' (23 sources)
-Compile Swift Module 'Event' (2 sources)
-clang: warning: argument unused during compilation: '-Xcc'
+Compile CHTTPParser http_parser.c
+Compile COpenSSL xts128.c
+Compile COpenSSL xcbc_enc.c
+Compile COpenSSL x_x509a.c
+Compile COpenSSL x_x509.c
+Compile COpenSSL x_val.c
+Compile COpenSSL x_spki.c
+Compile COpenSSL x_sig.c
+Compile COpenSSL x_req.c
+Compile COpenSSL x_pubkey.c
+Compile COpenSSL x_pkey.c
+Compile COpenSSL x_nx509.c
+Compile COpenSSL x_name.c
+Compile COpenSSL x_long.c
+Compile COpenSSL x_info.c
+Compile COpenSSL x_exten.c
+Compile COpenSSL x_crl.c
+Compile COpenSSL x_bignum.c
+Compile COpenSSL x_attrib.c
+Compile COpenSSL x_all.c
+Compile COpenSSL x_algor.c
+Compile COpenSSL x509type.c
+Compile COpenSSL x509spki.c
+Compile COpenSSL x509rset.c
+Compile COpenSSL x509name.c
+Compile COpenSSL x509cset.c
+Compile COpenSSL x509_vpm.c
+Compile COpenSSL x509_vfy.c
+Compile COpenSSL x509_v3.c
+Compile COpenSSL x509_txt.c
+Compile COpenSSL x509_trs.c
+Compile COpenSSL x509_set.c
+Compile COpenSSL x509_req.c
+Compile COpenSSL x509_r2x.c
+Compile COpenSSL x509_obj.c
+Compile COpenSSL x509_lu.c
+Compile COpenSSL x509_ext.c
+Compile COpenSSL x509_err.c
+Compile COpenSSL x509_def.c
+Compile COpenSSL x509_d2.c
+Compile COpenSSL x509_cmp.c
+Compile COpenSSL x509_att.c
+Compile COpenSSL wrap128.c
+Compile COpenSSL wp_dgst.c
+Compile COpenSSL wp_block.c
+Compile COpenSSL v3err.c
+Compile COpenSSL v3_utl.c
+Compile COpenSSL v3_sxnet.c
+Compile COpenSSL v3_skey.c
+Compile COpenSSL v3_scts.c
+Compile COpenSSL v3_purp.c
+Compile COpenSSL v3_prn.c
+Compile COpenSSL v3_pmaps.c
+Compile COpenSSL v3_pku.c
+Compile COpenSSL v3_pcons.c
+Compile COpenSSL v3_pcia.c
+Compile COpenSSL v3_pci.c
+Compile COpenSSL v3_ocsp.c
+Compile COpenSSL v3_ncons.c
+Compile COpenSSL v3_lib.c
+Compile COpenSSL v3_int.c
+Compile COpenSSL v3_info.c
+Compile COpenSSL v3_ia5.c
+Compile COpenSSL v3_genn.c
+Compile COpenSSL v3_extku.c
+Compile COpenSSL v3_enum.c
+Compile COpenSSL v3_crld.c
+Compile COpenSSL v3_cpols.c
+Compile COpenSSL v3_conf.c
+Compile COpenSSL v3_bitst.c
+Compile COpenSSL v3_bcons.c
+Compile COpenSSL v3_asid.c
+Compile COpenSSL v3_alt.c
+Compile COpenSSL v3_akeya.c
+Compile COpenSSL v3_akey.c
+Compile COpenSSL v3_addr.c
+Compile COpenSSL uid.c
+Compile COpenSSL ui_util.c
+Compile COpenSSL ui_openssl.c
+Compile COpenSSL ui_lib.c
+Compile COpenSSL ui_err.c
+Compile COpenSSL ui_compat.c
+Compile COpenSSL txt_db.c
+Compile COpenSSL ts_verify_ctx.c
+Compile COpenSSL ts_rsp_verify.c
+Compile COpenSSL ts_rsp_utils.c
+Compile COpenSSL ts_rsp_sign.c
+Compile COpenSSL ts_rsp_print.c
+Compile COpenSSL ts_req_utils.c
+Compile COpenSSL ts_req_print.c
+Compile COpenSSL ts_lib.c
+Compile COpenSSL ts_err.c
+Compile COpenSSL ts_conf.c
+Compile COpenSSL ts_asn1.c
+Compile COpenSSL tls_srp.c
+Compile COpenSSL th-lock.c
+Compile COpenSSL tb_store.c
+Compile COpenSSL tb_rsa.c
+Compile COpenSSL tb_rand.c
+Compile COpenSSL tb_pkmeth.c
+Compile COpenSSL tb_ecdsa.c
+Compile COpenSSL tb_ecdh.c
+Compile COpenSSL tb_dsa.c
+Compile COpenSSL tb_digest.c
+Compile COpenSSL tb_dh.c
+Compile COpenSSL tb_cipher.c
+Compile COpenSSL tb_asnmth.c
+Compile COpenSSL tasn_utl.c
+Compile COpenSSL tasn_typ.c
+Compile COpenSSL tasn_prn.c
+Compile COpenSSL tasn_new.c
+Compile COpenSSL tasn_fre.c
+Compile COpenSSL tasn_enc.c
+Compile COpenSSL tasn_dec.c
+Compile COpenSSL t_x509a.c
+Compile COpenSSL t_x509.c
+Compile COpenSSL t_spki.c
+Compile COpenSSL t_req.c
+Compile COpenSSL t_pkey.c
+Compile COpenSSL t_crl.c
+Compile COpenSSL t_bitst.c
+Compile COpenSSL t1_trce.c
+Compile COpenSSL t1_srvr.c
+Compile COpenSSL t1_reneg.c
+Compile COpenSSL t1_meth.c
+Compile COpenSSL t1_lib.c
+Compile COpenSSL t1_ext.c
+Compile COpenSSL t1_enc.c
+Compile COpenSSL t1_clnt.c
+Compile COpenSSL str2key.c
+Compile COpenSSL stack.c
+Compile COpenSSL ssl_utst.c
+Compile COpenSSL ssl_txt.c
+Compile COpenSSL ssl_stat.c
+Compile COpenSSL ssl_sess.c
+Compile COpenSSL ssl_rsa.c
+Compile COpenSSL ssl_lib.c
+Compile COpenSSL ssl_err2.c
+Compile COpenSSL ssl_err.c
+Compile COpenSSL ssl_conf.c
+Compile COpenSSL ssl_ciph.c
+Compile COpenSSL ssl_cert.c
+Compile COpenSSL ssl_asn1.c
+Compile COpenSSL ssl_algs.c
+Compile COpenSSL srp_vfy.c
+Compile COpenSSL srp_lib.c
+Compile COpenSSL sha_one.c
+Compile COpenSSL sha_dgst.c
+Compile COpenSSL sha512.c
+Compile COpenSSL sha256.c
+Compile COpenSSL sha1dgst.c
+Compile COpenSSL sha1_one.c
+Compile COpenSSL set_key.c
+Compile COpenSSL seed_ofb.c
+Compile COpenSSL seed_ecb.c
+Compile COpenSSL seed_cfb.c
+Compile COpenSSL seed_cbc.c
+Compile COpenSSL seed.c
+Compile COpenSSL s3_srvr.c
+Compile COpenSSL s3_pkt.c
+Compile COpenSSL s3_meth.c
+Compile COpenSSL s3_lib.c
+Compile COpenSSL s3_enc.c
+Compile COpenSSL s3_clnt.c
+Compile COpenSSL s3_cbc.c
+Compile COpenSSL s3_both.c
+Compile COpenSSL s2_srvr.c
+Compile COpenSSL s2_pkt.c
+Compile COpenSSL s2_meth.c
+Compile COpenSSL s2_lib.c
+Compile COpenSSL s2_enc.c
+Compile COpenSSL s2_clnt.c
+Compile COpenSSL s23_srvr.c
+Compile COpenSSL s23_pkt.c
+Compile COpenSSL s23_meth.c
+Compile COpenSSL s23_lib.c
+Compile COpenSSL s23_clnt.c
+Compile COpenSSL rsaz_exp.c
+Compile COpenSSL rsa_x931.c
+Compile COpenSSL rsa_ssl.c
+Compile COpenSSL rsa_sign.c
+Compile COpenSSL rsa_saos.c
+Compile COpenSSL rsa_pss.c
+Compile COpenSSL rsa_prn.c
+Compile COpenSSL rsa_pmeth.c
+Compile COpenSSL rsa_pk1.c
+Compile COpenSSL rsa_oaep.c
+Compile COpenSSL rsa_null.c
+Compile COpenSSL rsa_none.c
+Compile COpenSSL rsa_lib.c
+Compile COpenSSL rsa_gen.c
+Compile COpenSSL rsa_err.c
+Compile COpenSSL rsa_eay.c
+Compile COpenSSL rsa_depr.c
+Compile COpenSSL rsa_crpt.c
+Compile COpenSSL rsa_chk.c
+Compile COpenSSL rsa_asn1.c
+Compile COpenSSL rsa_ameth.c
+Compile COpenSSL rpc_enc.c
+Compile COpenSSL rmd_one.c
+Compile COpenSSL rmd_dgst.c
+Compile COpenSSL read2pwd.c
+Compile COpenSSL rc4_utl.c
+Compile COpenSSL rc4_skey.c
+Compile COpenSSL rc4_enc.c
+Compile COpenSSL rc2ofb64.c
+Compile COpenSSL rc2cfb64.c
+Compile COpenSSL rc2_skey.c
+Compile COpenSSL rc2_ecb.c
+Compile COpenSSL rc2_cbc.c
+Compile COpenSSL randfile.c
+Compile COpenSSL rand_win.c
+Compile COpenSSL rand_vms.c
+Compile COpenSSL rand_unix.c
+Compile COpenSSL rand_os2.c
+Compile COpenSSL rand_nw.c
+Compile COpenSSL rand_lib.c
+Compile COpenSSL rand_key.c
+Compile COpenSSL rand_err.c
+Compile COpenSSL rand_egd.c
+Compile COpenSSL qud_cksm.c
+Compile COpenSSL pvkfmt.c
+Compile COpenSSL pqueue.c
+Compile COpenSSL pmeth_lib.c
+Compile COpenSSL pmeth_gn.c
+Compile COpenSSL pmeth_fn.c
+Compile COpenSSL pkcs7err.c
+Compile COpenSSL pk7_smime.c
+Compile COpenSSL pk7_mime.c
+Compile COpenSSL pk7_lib.c
+Compile COpenSSL pk7_doit.c
+Compile COpenSSL pk7_dgst.c
+Compile COpenSSL pk7_attr.c
+Compile COpenSSL pk7_asn1.c
+Compile COpenSSL pk12err.c
+Compile COpenSSL pem_xaux.c
+Compile COpenSSL pem_x509.c
+Compile COpenSSL pem_sign.c
+Compile COpenSSL pem_seal.c
+Compile COpenSSL pem_pkey.c
+Compile COpenSSL pem_pk8.c
+Compile COpenSSL pem_oth.c
+Compile COpenSSL pem_lib.c
+Compile COpenSSL pem_info.c
+Compile COpenSSL pem_err.c
+Compile COpenSSL pem_all.c
+Compile COpenSSL pcy_tree.c
+Compile COpenSSL pcy_node.c
+Compile COpenSSL pcy_map.c
+Compile COpenSSL pcy_lib.c
+Compile COpenSSL pcy_data.c
+Compile COpenSSL pcy_cache.c
+Compile COpenSSL pcbc_enc.c
+Compile COpenSSL p_verify.c
+Compile COpenSSL p_sign.c
+Compile COpenSSL p_seal.c
+Compile COpenSSL p_open.c
+Compile COpenSSL p_lib.c
+Compile COpenSSL p_enc.c
+Compile COpenSSL p_dec.c
+Compile COpenSSL p8_pkey.c
+Compile COpenSSL p5_pbev2.c
+Compile COpenSSL p5_pbe.c
+Compile COpenSSL p5_crpt2.c
+Compile COpenSSL p5_crpt.c
+Compile COpenSSL p12_utl.c
+Compile COpenSSL p12_p8e.c
+Compile COpenSSL p12_p8d.c
+Compile COpenSSL p12_npas.c
+Compile COpenSSL p12_mutl.c
+Compile COpenSSL p12_kiss.c
+Compile COpenSSL p12_key.c
+Compile COpenSSL p12_init.c
+Compile COpenSSL p12_decr.c
+Compile COpenSSL p12_crt.c
+Compile COpenSSL p12_crpt.c
+Compile COpenSSL p12_attr.c
+Compile COpenSSL p12_asn.c
+Compile COpenSSL p12_add.c
+Compile COpenSSL openssl.c
+Compile COpenSSL openbsd_hw.c
+Compile COpenSSL ofb_enc.c
+Compile COpenSSL ofb64enc.c
+Compile COpenSSL ofb64ede.c
+Compile COpenSSL ofb128.c
+Compile COpenSSL ocsp_vfy.c
+Compile COpenSSL ocsp_srv.c
+Compile COpenSSL ocsp_prn.c
+Compile COpenSSL ocsp_lib.c
+Compile COpenSSL ocsp_ht.c
+Compile COpenSSL ocsp_ext.c
+Compile COpenSSL ocsp_err.c
+Compile COpenSSL ocsp_cl.c
+Compile COpenSSL ocsp_asn.c
+Compile COpenSSL obj_xref.c
+Compile COpenSSL obj_lib.c
+Compile COpenSSL obj_err.c
+Compile COpenSSL obj_dat.c
+Compile COpenSSL o_time.c
+Compile COpenSSL o_str.c
+Compile COpenSSL o_names.c
+Compile COpenSSL o_init.c
+Compile COpenSSL o_fips.c
+Compile COpenSSL o_dir.c
+Compile COpenSSL nsseq.c
+Compile COpenSSL names.c
+Compile COpenSSL n_pkey.c
+Compile COpenSSL mem_dbg.c
+Compile COpenSSL mem_clr.c
+Compile COpenSSL mem.c
+Compile COpenSSL mdc2dgst.c
+Compile COpenSSL mdc2_one.c
+Compile COpenSSL md_rand.c
+Compile COpenSSL md5_one.c
+Compile COpenSSL md5_dgst.c
+Compile COpenSSL md4_one.c
+Compile COpenSSL md4_dgst.c
+Compile COpenSSL m_wp.c
+Compile COpenSSL m_sigver.c
+Compile COpenSSL m_sha1.c
+Compile COpenSSL m_sha.c
+Compile COpenSSL m_ripemd.c
+Compile COpenSSL m_null.c
+Compile COpenSSL m_mdc2.c
+Compile COpenSSL m_md5.c
+Compile COpenSSL m_md4.c
+Compile COpenSSL m_md2.c
+Compile COpenSSL m_ecdsa.c
+Compile COpenSSL m_dss1.c
+Compile COpenSSL m_dss.c
+Compile COpenSSL lhash.c
+Compile COpenSSL lh_stats.c
+Compile COpenSSL kssl.c
+Compile COpenSSL krb5_asn.c
+Compile COpenSSL i_skey.c
+Compile COpenSSL i_ofb64.c
+Compile COpenSSL i_ecb.c
+Compile COpenSSL i_cfb64.c
+Compile COpenSSL i_cbc.c
+Compile COpenSSL i2d_pu.c
+Compile COpenSSL i2d_pr.c
+Compile COpenSSL hmac.c
+Compile COpenSSL hm_pmeth.c
+Compile COpenSSL hm_ameth.c
+Compile COpenSSL gosthash.c
+Compile COpenSSL gost_sign.c
+Compile COpenSSL gost_pmeth.c
+Compile COpenSSL gost_params.c
+Compile COpenSSL gost_md.c
+Compile COpenSSL gost_keywrap.c
+Compile COpenSSL gost_eng.c
+Compile COpenSSL gost_ctl.c
+Compile COpenSSL gost_crypt.c
+Compile COpenSSL gost_asn1.c
+Compile COpenSSL gost_ameth.c
+Compile COpenSSL gost94_keyx.c
+Compile COpenSSL gost89.c
+Compile COpenSSL gost2001_keyx.c
+Compile COpenSSL gost2001.c
+Compile COpenSSL gcm128.c
+Compile COpenSSL fips_ers.c
+Compile COpenSSL fcrypt_b.c
+Compile COpenSSL fcrypt.c
+Compile COpenSSL f_string.c
+Compile COpenSSL f_int.c
+Compile COpenSSL f_enum.c
+Compile COpenSSL ex_data.c
+Compile COpenSSL evp_pkey.c
+Compile COpenSSL evp_pbe.c
+Compile COpenSSL evp_lib.c
+Compile COpenSSL evp_key.c
+Compile COpenSSL evp_err.c
+Compile COpenSSL evp_enc.c
+Compile COpenSSL evp_cnf.c
+Compile COpenSSL evp_asn1.c
+Compile COpenSSL evp_acnf.c
+Compile COpenSSL err_prn.c
+Compile COpenSSL err_all.c
+Compile COpenSSL err.c
+Compile COpenSSL eng_table.c
+Compile COpenSSL eng_rdrand.c
+Compile COpenSSL eng_pkey.c
+Compile COpenSSL eng_openssl.c
+Compile COpenSSL eng_list.c
+Compile COpenSSL eng_lib.c
+Compile COpenSSL eng_init.c
+Compile COpenSSL eng_fat.c
+Compile COpenSSL eng_err.c
+Compile COpenSSL eng_dyn.c
+Compile COpenSSL eng_ctrl.c
+Compile COpenSSL eng_cryptodev.c
+Compile COpenSSL eng_cnf.c
+Compile COpenSSL eng_all.c
+Compile COpenSSL encode.c
+Compile COpenSSL enc_writ.c
+Compile COpenSSL enc_read.c
+Compile COpenSSL ede_cbcm_enc.c
+Compile COpenSSL ecs_vrf.c
+Compile COpenSSL ecs_sign.c
+Compile COpenSSL ecs_ossl.c
+Compile COpenSSL ecs_lib.c
+Compile COpenSSL ecs_err.c
+Compile COpenSSL ecs_asn1.c
+Compile COpenSSL ecp_smpl.c
+Compile COpenSSL ecp_oct.c
+Compile COpenSSL ecp_nistputil.c
+Compile COpenSSL ecp_nistp521.c
+Compile COpenSSL ecp_nistp256.c
+Compile COpenSSL ecp_nistp224.c
+Compile COpenSSL ecp_nist.c
+Compile COpenSSL ecp_mont.c
+Compile COpenSSL eck_prn.c
+Compile COpenSSL ech_ossl.c
+Compile COpenSSL ech_lib.c
+Compile COpenSSL ech_key.c
+Compile COpenSSL ech_kdf.c
+Compile COpenSSL ech_err.c
+Compile COpenSSL ecb_enc.c
+Compile COpenSSL ecb3_enc.c
+Compile COpenSSL ec_print.c
+Compile COpenSSL ec_pmeth.c
+Compile COpenSSL ec_oct.c
+Compile COpenSSL ec_mult.c
+Compile COpenSSL ec_lib.c
+Compile COpenSSL ec_key.c
+Compile COpenSSL ec_err.c
+Compile COpenSSL ec_cvt.c
+Compile COpenSSL ec_curve.c
+Compile COpenSSL ec_check.c
+Compile COpenSSL ec_asn1.c
+Compile COpenSSL ec_ameth.c
+Compile COpenSSL ec2_smpl.c
+Compile COpenSSL ec2_oct.c
+Compile COpenSSL ec2_mult.c
+Compile COpenSSL ebcdic.c
+Compile COpenSSL e_xcbc_d.c
+Compile COpenSSL e_ubsec_err.c
+Compile COpenSSL e_ubsec.c
+Compile COpenSSL e_sureware_err.c
+Compile COpenSSL e_sureware.c
+Compile COpenSSL e_seed.c
+Compile COpenSSL e_rc5.c
+Compile COpenSSL e_rc4_hmac_md5.c
+Compile COpenSSL e_rc4.c
+Compile COpenSSL e_rc2.c
+Compile COpenSSL e_padlock.c
+Compile COpenSSL e_old.c
+Compile COpenSSL e_nuron_err.c
+Compile COpenSSL e_nuron.c
+Compile COpenSSL e_null.c
+Compile COpenSSL e_idea.c
+Compile COpenSSL e_gost_err.c
+Compile COpenSSL e_gmp_err.c
+Compile COpenSSL e_gmp.c
+Compile COpenSSL e_des3.c
+Compile COpenSSL e_des.c
+Compile COpenSSL e_cswift_err.c
+Compile COpenSSL e_cswift.c
+Compile COpenSSL e_chil_err.c
+Compile COpenSSL e_chil.c
+Compile COpenSSL e_cast.c
+Compile COpenSSL e_capi_err.c
+Compile COpenSSL e_capi.c
+Compile COpenSSL e_camellia.c
+Compile COpenSSL e_bf.c
+Compile COpenSSL e_atalla_err.c
+Compile COpenSSL e_atalla.c
+Compile COpenSSL e_aes_cbc_hmac_sha256.c
+Compile COpenSSL e_aes_cbc_hmac_sha1.c
+Compile COpenSSL e_aes.c
+Compile COpenSSL e_aep_err.c
+Compile COpenSSL e_aep.c
+Compile COpenSSL e_4758cca_err.c
+Compile COpenSSL e_4758cca.c
+Compile COpenSSL dso_win32.c
+Compile COpenSSL dso_vms.c
+Compile COpenSSL dso_openssl.c
+Compile COpenSSL dso_null.c
+Compile COpenSSL dso_lib.c
+Compile COpenSSL dso_err.c
+Compile COpenSSL dso_dlfcn.c
+Compile COpenSSL dso_dl.c
+Compile COpenSSL dso_beos.c
+Compile COpenSSL dsa_vrf.c
+Compile COpenSSL dsa_sign.c
+Compile COpenSSL dsa_prn.c
+Compile COpenSSL dsa_pmeth.c
+Compile COpenSSL dsa_ossl.c
+Compile COpenSSL dsa_lib.c
+Compile COpenSSL dsa_key.c
+Compile COpenSSL dsa_gen.c
+Compile COpenSSL dsa_err.c
+Compile COpenSSL dsa_depr.c
+Compile COpenSSL dsa_asn1.c
+Compile COpenSSL dsa_ameth.c
+Compile COpenSSL digest.c
+Compile COpenSSL dh_rfc5114.c
+Compile COpenSSL dh_prn.c
+Compile COpenSSL dh_pmeth.c
+Compile COpenSSL dh_lib.c
+Compile COpenSSL dh_key.c
+Compile COpenSSL dh_kdf.c
+Compile COpenSSL dh_gen.c
+Compile COpenSSL dh_err.c
+Compile COpenSSL dh_depr.c
+Compile COpenSSL dh_check.c
+Compile COpenSSL dh_asn1.c
+Compile COpenSSL dh_ameth.c
+Compile COpenSSL des_old2.c
+Compile COpenSSL des_old.c
+Compile COpenSSL des_enc.c
+Compile COpenSSL d2i_pu.c
+Compile COpenSSL d2i_pr.c
+Compile COpenSSL d1_srvr.c
+Compile COpenSSL d1_srtp.c
+Compile COpenSSL d1_pkt.c
+Compile COpenSSL d1_meth.c
+Compile COpenSSL d1_lib.c
+Compile COpenSSL d1_clnt.c
+Compile COpenSSL d1_both.c
+Compile COpenSSL cversion.c
+Compile COpenSSL ctr128.c
+Compile COpenSSL cryptlib.c
+Compile COpenSSL cpt_err.c
+Compile COpenSSL conf_sap.c
+Compile COpenSSL conf_mod.c
+Compile COpenSSL conf_mall.c
+Compile COpenSSL conf_lib.c
+Compile COpenSSL conf_err.c
+Compile COpenSSL conf_def.c
+Compile COpenSSL conf_api.c
+Compile COpenSSL comp_lib.c
+Compile COpenSSL comp_err.c
+Compile COpenSSL cms_smime.c
+Compile COpenSSL cms_sd.c
+Compile COpenSSL cms_pwri.c
+Compile COpenSSL cms_lib.c
+Compile COpenSSL cms_kari.c
+Compile COpenSSL cms_io.c
+Compile COpenSSL cms_ess.c
+Compile COpenSSL cms_err.c
+Compile COpenSSL cms_env.c
+Compile COpenSSL cms_enc.c
+Compile COpenSSL cms_dd.c
+Compile COpenSSL cms_cd.c
+Compile COpenSSL cms_att.c
+Compile COpenSSL cms_asn1.c
+Compile COpenSSL cmll_utl.c
+Compile COpenSSL cmll_ofb.c
+Compile COpenSSL cmll_misc.c
+Compile COpenSSL cmll_ecb.c
+Compile COpenSSL cmll_ctr.c
+Compile COpenSSL cmll_cfb.c
+Compile COpenSSL cmll_cbc.c
+Compile COpenSSL cmac.c
+Compile COpenSSL cm_pmeth.c
+Compile COpenSSL cm_ameth.c
+Compile COpenSSL cfb_enc.c
+Compile COpenSSL cfb64enc.c
+Compile COpenSSL cfb64ede.c
+Compile COpenSSL cfb128.c
+Compile COpenSSL ccm128.c
+Compile COpenSSL cbc_enc.c
+Compile COpenSSL cbc_cksm.c
+Compile COpenSSL cbc3_enc.c
+Compile COpenSSL cbc128.c
+Compile COpenSSL camellia.c
+Compile COpenSSL c_zlib.c
+Compile COpenSSL c_skey.c
+Compile COpenSSL c_rle.c
+Compile COpenSSL c_ofb64.c
+Compile COpenSSL c_enc.c
+Compile COpenSSL c_ecb.c
+Compile COpenSSL c_cfb64.c
+Compile COpenSSL c_alld.c
+Compile COpenSSL c_allc.c
+Compile COpenSSL c_all.c
+Compile COpenSSL by_file.c
+Compile COpenSSL by_dir.c
+Compile COpenSSL buffer.c
+Compile COpenSSL buf_str.c
+Compile COpenSSL buf_err.c
+Compile COpenSSL bss_sock.c
+Compile COpenSSL bss_null.c
+Compile COpenSSL bss_mem.c
+Compile COpenSSL bss_log.c
+Compile COpenSSL bss_file.c
+Compile COpenSSL bss_fd.c
+Compile COpenSSL bss_dgram.c
+Compile COpenSSL bss_conn.c
+Compile COpenSSL bss_bio.c
+Compile COpenSSL bss_acpt.c
+Compile COpenSSL bn_x931p.c
+Compile COpenSSL bn_word.c
+Compile COpenSSL bn_sqrt.c
+Compile COpenSSL bn_sqr.c
+Compile COpenSSL bn_shift.c
+Compile COpenSSL bn_recp.c
+Compile COpenSSL bn_rand.c
+Compile COpenSSL bn_print.c
+Compile COpenSSL bn_prime.c
+Compile COpenSSL bn_nist.c
+Compile COpenSSL bn_mul.c
+Compile COpenSSL bn_mpi.c
+Compile COpenSSL bn_mont.c
+Compile COpenSSL bn_mod.c
+Compile COpenSSL bn_lib.c
+Compile COpenSSL bn_kron.c
+Compile COpenSSL bn_gf2m.c
+Compile COpenSSL bn_gcd.c
+Compile COpenSSL bn_exp2.c
+Compile COpenSSL bn_exp.c
+Compile COpenSSL bn_err.c
+Compile COpenSSL bn_div.c
+Compile COpenSSL bn_depr.c
+Compile COpenSSL bn_ctx.c
+Compile COpenSSL bn_const.c
+Compile COpenSSL bn_blind.c
+Compile COpenSSL bn_asm.c
+Compile COpenSSL bn_add.c
+Compile COpenSSL bio_ssl.c
+Compile COpenSSL bio_pk7.c
+Compile COpenSSL bio_ok.c
+Compile COpenSSL bio_ndef.c
+Compile COpenSSL bio_md.c
+Compile COpenSSL bio_lib.c
+Compile COpenSSL bio_err.c
+Compile COpenSSL bio_enc.c
+Compile COpenSSL bio_cb.c
+Compile COpenSSL bio_b64.c
+Compile COpenSSL bio_asn1.c
+Compile COpenSSL bf_skey.c
+Compile COpenSSL bf_ofb64.c
+Compile COpenSSL bf_null.c
+Compile COpenSSL bf_nbio.c
+Compile COpenSSL bf_lbuf.c
+Compile COpenSSL bf_enc.c
+Compile COpenSSL bf_ecb.c
+Compile COpenSSL bf_cfb64.c
+Compile COpenSSL bf_buff.c
+Compile COpenSSL b_sock.c
+Compile COpenSSL b_print.c
+Compile COpenSSL b_dump.c
+Compile COpenSSL asn_pack.c
+Compile COpenSSL asn_moid.c
+Compile COpenSSL asn_mime.c
+Compile COpenSSL asn1_par.c
+Compile COpenSSL asn1_lib.c
+Compile COpenSSL asn1_gen.c
+Compile COpenSSL asn1_err.c
+Compile COpenSSL ameth_lib.c
+Compile COpenSSL aes_wrap.c
+Compile COpenSSL aes_ofb.c
+Compile COpenSSL aes_misc.c
+Compile COpenSSL aes_ige.c
+Compile COpenSSL aes_ecb.c
+Compile COpenSSL aes_ctr.c
+Compile COpenSSL aes_core.c
+Compile COpenSSL aes_cfb.c
+Compile COpenSSL aes_cbc.c
+Compile COpenSSL a_verify.c
+Compile COpenSSL a_utf8.c
+Compile COpenSSL a_utctm.c
+Compile COpenSSL a_type.c
+Compile COpenSSL a_time.c
+Compile COpenSSL a_strnid.c
+Compile COpenSSL a_strex.c
+Compile COpenSSL a_sign.c
+Compile COpenSSL a_set.c
+Compile COpenSSL a_print.c
+Compile COpenSSL a_octet.c
+Compile COpenSSL a_object.c
+Compile COpenSSL a_mbstr.c
+Compile COpenSSL a_int.c
+Compile COpenSSL a_i2d_fp.c
+Compile COpenSSL a_gentm.c
+Compile COpenSSL a_enum.c
+Compile COpenSSL a_dup.c
+Compile COpenSSL a_digest.c
+Compile COpenSSL a_d2i_fp.c
+Compile COpenSSL a_bytes.c
+Compile COpenSSL a_bool.c
+Compile COpenSSL a_bitstr.c
+Compile Swift Module 'Reflection' (23 sources)
+Linking CPOSIX
+Linking CYAJL
 Linking CHTTPParser
-clang: warning: argument unused during compilation: '-Xcc'
-clang: warning: argument unused during compilation: '-Xcc'
-clang: warning: argument unused during compilation: '-Xcc'
-Linking CURIParser
-Compile Swift Module 'Base64' (1 sources)
-Compile Swift Module 'StructuredData' (1 sources)
-Compile Swift Module 'S4' (23 sources)
-Compile Swift Module 'Log' (6 sources)
-clang: warning: argument unused during compilation: '-Xcc'
 Linking CLibvenice
-Compile Swift Module 'WebSocket' (5 sources)
-Compile Swift Module 'MediaType' (1 sources)
-Compile Swift Module 'JSON' (5 sources)
-Compile Swift Module 'URI' (1 sources)
-Compile Swift Module 'Venice' (11 sources)
-Compile Swift Module 'HTTP' (9 sources)
-Compile Swift Module 'HTTPParser' (3 sources)
-Compile Swift Module 'HTTPSerializer' (3 sources)
+Linking COpenSSL
+Compile Swift Module 'POSIX' (11 sources)
+Compile Swift Module 'Axis' (22 sources)
+Compile Swift Module 'Venice' (12 sources)
+Compile Swift Module 'OpenSSL' (13 sources)
 Compile Swift Module 'IP' (1 sources)
-Compile Swift Module 'File' (2 sources)
-Compile Swift Module 'TCP' (3 sources)
-Compile Swift Module 'OpenSSL' (15 sources)
-Compile Swift Module 'HTTPClient' (1 sources)
-Compile Swift Module 'TCPSSL' (2 sources)
-Compile Swift Module 'HTTPSClient' (2 sources)
+Compile Swift Module 'File' (1 sources)
+Compile Swift Module 'HTTP' (29 sources)
+Compile Swift Module 'WebSocket' (7 sources)
+Compile Swift Module 'TCP' (5 sources)
+Compile Swift Module 'HTTPFile' (4 sources)
+Compile Swift Module 'HTTPClient' (2 sources)
 Compile Swift Module 'WebSocketClient' (1 sources)
 Compile Swift Module 'SwiftSlackBotter' (14 sources)
